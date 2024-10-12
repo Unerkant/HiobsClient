@@ -1,0 +1,32 @@
+/**
+ *  Den 29.09.2024
+ *  CSS-layout Paul Richter
+ */
+
+@charset "UTF-8";
+*			        { margin: 0;  padding: 0; }
+html, body 	        { height: 100%; width: 100%; }
+a                   { text-decoration: none;}
+
+    /* <!-- Allgemein angaben --> */
+
+/*   <style type="text/css"><!-- @import"/css/style.css"; --></style> */
+/* background-image: url("../img/giter.png"); box-shadow: 0px 0px 5px 0px rgba: 0,0,0,0.9; */
+/* Box auf 100% kommen box-sizing: border-box; */
+
+.twilight           { color: #203763; } /* dunkel Blau */
+.rubin              { color: #CC2900; }
+.leuchtgrun         { color: #00F700; } /* Grün(Uhr) */
+
+    /* home.html
+    -------------*/
+.autoWidth
+{
+    box-sizing: border-box;
+    width: 99%;
+    padding: 0.6em;
+}
+.fontSize11
+{
+    font-size: 1.1em;
+}

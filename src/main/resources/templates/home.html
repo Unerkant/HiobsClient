@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style type="text/css"><!-- @import"/css/style.css"; --></style>
+</head>
+<body>
+  <br>
+  <h2 align="center">Hiobs Client</h2>
+  <div align="center"><small id="connectAnzeige"></small></div>
+  <div class="leer50">&#160;</div>
+  <div align="center">
+
+      <div id="connectBox">
+          <strong>bitte melden sie sich an!</strong>
+          <input type="text" id="userName" placeholder="Name" autofocus
+                 class="fontSize11" maxlength="50" width="200" style="padding: 0.6em;" >
+          &#160;&#160;&#160;
+          <button type="button" onclick="onConnect()" style="padding: 0.6em;" >Verbinden</button>
+      </div>
+
+      <table width="80%" border="0" cellspacing="5" cellpadding="0" id="messageBox" style="visibility: hidden;">
+
+          <tr><td colspan="3" id="mitWemVerbunden"></td></tr>
+          <tr><td colspan="3"></td></tr>
+
+          <tr>
+              <td width="150">
+                  <input type="text" id="recipientName" placeholder="Name"  class="fontSize11 autoWidth" autofocus >
+              </td>
+              <td>
+                  <input type="text" id="messageText" placeholder="Schreibe eine Nachricht..." autofocus required
+                             class="fontSize11 autoWidth" >
+              </td>
+              <td width="100" align="center">
+                  <button onclick="sendeMessage(recipientName.value, messageText.value)"
+                              class="fontSize11 autoWidth">Senden</button>
+              </td>
+          </tr>
+          <tr><td colspan="3">&#160;</td></tr>
+
+
+          <tfoot id="messageAusgabe"></tfoot>
+
+      </table>
+  </div>
+
+
+  <script src="/js/sockjs.min.js"></script>
+  <script src="/js/stomp.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
