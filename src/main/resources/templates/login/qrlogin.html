@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head data-th-insert="~{ fragments/head :: global_head}"></head>
+<body>
+
+<noscript data-th-insert="~{fragments/noscript :: nojavascript}"></noscript>
+
+<!-- ACHTUNG: nicht Löschen, wird von no script benutzt -->
+<div class="container">
+
+<article class="article layout">
+<div class="loginBox">
+  <div class="leer3">&#160;</div>
+  <div class="itemCenter">
+    <img src="/img/qrcode.svg" class="loginImg">
+  </div>
+  <div class="leer2">&#160;</div>
+
+  <ol class="qrcodeOl">
+    <li>Offnen Sie hiobspost auf Handy</li>
+    <li>Navigieren Sie zu Setting -> QRCode</li>
+    <li>Halten Sie dem Handy auf Desktop Bildschirm</li>
+  </ol>
+
+  <div class="leer2">&#160;</div>
+
+  <a data-th-href="@{/login/maillogin}" class="loginLink">MIT&#160;&#160;E-MAIL&#160;&#160;ANMELDEN</a>
+</div>
+</article>
+
+</div><!-- /container -->
+</body>
+</html>

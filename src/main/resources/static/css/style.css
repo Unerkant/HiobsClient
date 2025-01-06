@@ -1,32 +1,155 @@
 /**
  *  Den 29.09.2024
  *  CSS-layout Paul Richter
+ *
+ *  <style type="text/css"><!-- @import"/css/style.css"; --></style>
+ *  background-image: url("../img/giter.png"); box-shadow: 0px 0px 5px 0px rgba: 0,0,0,0.9;
+ *  Box auf 100% kommen box-sizing: border-box;
+ *  1rem = 16px,
  */
 
 @charset "UTF-8";
 *			        { margin: 0;  padding: 0; }
-html, body 	        { height: 100%; width: 100%; }
-a                   { text-decoration: none;}
+html, body 	        { height: 100%; width: 100%; min-width: 500px; min-height: 600px; }
+html                { font-family: sans-serif; line-height: 1.15; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+*, *::before, *::after  { box-sizing: border-box; }
+
+a:link, a:visited, a:hover, a:active    { text-decoration: none; cursor: pointer; color: #000; }
+.boxSizing          { box-sizing: border-box; }
+.finger             { cursor: pointer; }
+.clear              { clear: both; }
+img.blok			{ display: block; width: 100%; }
 
     /* <!-- Allgemein angaben --> */
 
-/*   <style type="text/css"><!-- @import"/css/style.css"; --></style> */
-/* background-image: url("../img/giter.png"); box-shadow: 0px 0px 5px 0px rgba: 0,0,0,0.9; */
-/* Box auf 100% kommen box-sizing: border-box; */
+.leer0              { height: 0.3em; border: 1px solid transparent; }
+.leer1              { height: 1.0em; border: 1px solid transparent; } /* 16px */
+.leer2              { height: 2.0em; border: 1px solid transparent; }
+.leer3              { height: 3.0em; border: 1px solid transparent; } /* 48px */
+.leer4              { height: 4.0em; border: 1px solid transparent; }
+.leer5              { height: 5.0em; border: 1px solid transparent; }
+.leer7              { height: 7.0em; border: 1px solid transparent; } /* 112px */
+.marginNull         { margin: 0; padding: 0; }
 
-.twilight           { color: #203763; } /* dunkel Blau */
-.rubin              { color: #CC2900; }
-.leuchtgrun         { color: #00F700; } /* Grün(Uhr) */
+    /************** Color *********************** */
 
-    /* home.html
-    -------------*/
-.autoWidth
-{
-    box-sizing: border-box;
-    width: 99%;
-    padding: 0.6em;
+.catalinaBlue       { color: #1F3661; } /* dunkel Blau */
+.leuchtGrun         { color: #00F700; } /* Grün(Uhr) */
+.kellyGrun          { color: #47A80C; } /* Grün */
+.islamicGrun        { color: #0CA81F; } /* Grün */
+
+.grauMittel         { color: #808080; } /* Gray 50% */
+.grau               { color: #999999; } /* Gray 60%*/
+.grauHell           { color: #CCCCCC; } /* Grau 80% */
+.grauMild           { color: #F2F2F2; } /* Grau 95%*/
+.grauKlar           { color: #FAFAFA; } /* Grau 98%*/
+
+.red                { color: #FF0000; } /* Red 50% */
+.maroon             { color: #720000; } /* Red Dark 22% */
+.darkred            { color: #8F0000; } /* Red Dark 28% */
+.harleyOrange       { color: #CC2900; } /* red 40% */
+.lilaLight          { color: #ED457A; } /* Lila 60% */
+
+:root {
+    --linkBlau:             #1608D3;        /* blau 43% */
+    --dunkelBlau:           #1F3661;        /* blau 30% */
+    --hoverHellerBlau:      #E5F5FF;        /* blau 95% */
+    --hoverHellBlau:        #CCEEFF;        /* blau 90% */
+    --hellBlau:             #F4FEFF;        /* balu 98% */
+    --redText:              #720000;        /* maroon 22% */
+    --redBorder:            #FF9999;        /* Red 80% */
+    --redGround:            #FFE6E6;        /* Red 95% */
+    --grauText:             #999999;        /* Gray 60% */
 }
-.fontSize11
-{
-    font-size: 1.1em;
-}
+
+    /* ************ Allgemein ******************* */
+
+.autoWidth          { box-sizing: border-box; width: 99%; }
+.boxShadow		    { box-shadow: 0px 0px 8px 0px rgba(66,68,90,1); }
+.shadow             { box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .10); }
+.shadowInput        { box-shadow: inset 0 -5px 45px rgba(0,0,0,0.125), 0px 10px 14px -7px #276873; -webkit-transition:
+                      box-shadow .5s ease; -moz-transition: box-shadow .5s ease; -o-transition: box-shadow .5s ease;
+                      -ms-transition: box-shadow .5s ease; transition: box-shadow .5s ease;
+                    }
+.shadowInput:focus  { box-shadow: inset 0 -5px 45px rgb(255,253,230); }
+.itemCenter         { text-align: center; }
+
+    /* ACHTUNG: .container nicht löschen oder ändern */
+.container          { min-height: calc(100vh - 0px); margin: 0; padding: 0; } /* height:100% - footer */
+.article            { width: 30rem;  /* border: 1px solid red; */ }
+.layout             { margin-left: auto; margin-right: auto; /* border: 1px solid red; */  }
+.flexBetween        { display: flex; justify-content: space-between; }  /* end/mitte/end */
+.flexAround         { display: flex; justify-content: space-around; }   /* div-33%(mitte)/div-33%(mitte)/div-33%(mitte) */
+.flexCenter         { display: flex; justify-content: center; }         /* mitte/mitte/mitte */
+.flexEnd            { display: flex; justify-content: flex-end; }       /* recht ende */
+.fehler             { background-color: #FFE6E6; border: 1px solid #FF0000; border-radius: 10px;
+                      font-size: inherit; padding:10px; }
+.msgBlack           { visibility: hidden; background-color: #202020; border: 1px solid black; border-radius: 0.35em;
+                      color: #F2F2F2; padding: 0.6em; }
+
+
+    /* login Allgemein (qrcode + mail + idcode + success.html)
+    --------------------------------------------------*/
+.loginBox           { padding: 1rem; /* border: 1px solid red; */ }
+.loginImg           { width: 16rem; height: 16rem;}
+.loginImgKlein      { width: 8rem; height: 8rem;}
+.loginForm          { margin: 0; padding: 0;}
+.loginLink          { display: inline-block; width: 100%; padding: 1rem; text-align: center; border: 1px solid #999;
+                      border-radius: 25px; color: var(--dunkelBlau); font-size: 1.0em;
+                    }
+.loginLink:hover    { background-color: var(--hoverHellBlau); border: 1px solid #DFDFDF; border-radius: 25px; }
+
+    /* qrcode.html (allgemein login)
+    ---------------------------------*/
+.qrcodeOl           { padding-left: 80px; line-height: 200%; }
+
+    /* mail.html (allgemein login)
+    -------------------------------*/
+.mailFieldset       { border: 2px solid #4169E1; border-radius: 10px; padding: 0 5px 10px; }
+.mailInput          { border: none; padding: 10px; font-size: 1.0em; }
+.mailInput:focus    { outline: none; border: none; }
+
+
+    /* idcode.html (allgemein login)
+    ----------------------------------*/
+.idcodeBox          { /* border: 1px solid red; */ }
+.idcodeInfo         { background-color: var(--hellBlau); border: 1px solid var(--grauText); padding: 1.0em;
+                      border-radius: 15px;
+                    }
+.idcodeFehler       { padding: 1.0em; border: 1px solid var(--hoverHellBlau); border-radius: 10px; color: var(--redText); }
+.idcodeForm         {}
+.idcodeInputBox     { width: 75px; height: 75px; }
+.idcodeInput        { width: 100%; height:100%; padding: 10px; box-sizing: border-box; font-size: 3.0em; text-align: center;
+                      text-shadow: 1px 1px 1px rgba(0,0,0,0.3); color: #495057; background-color: inherit; background-clip:
+                      padding-box; border: none; outline: none; border: #CED4DA solid 1px; border-radius: 0.25em;
+                    }
+
+    /* success.html (allgemein login)
+    ---------------------------------*/
+.success            { max-width: 50rem; min-width: 30rem; padding: 15px; /* border: 1px solid red; */ }
+.successBox         { /* border: 1px solid black; */ }
+.successTab         { table-layout: fixed; width: 100%;  }
+.successTd          { width: 12.0rem; padding: 10px 0;}
+.captionTop         { caption-side: top; }
+.successBorder      { border-top: 2px solid var(--grauText); }
+.successOverflow    { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.successImg         { width: 2.5rem; height: 2.5rem; }
+.successImg:hover   { color: var(--hoverHellBlau); }
+
+    /* sperre.html
+    -------------- */
+.sperre             { padding: 100px 30px;  }
+.sperreBox          { background-color: var(--redGround); border: 2px solid var(--redBorder); padding: 20px;
+                       border-radius: 10px; }
+.sperreCountDown    {}
+.sperreText         { max-width: 30rem; }
+.sperreJs           { width: 100px; color: var(--grauText); text-align: center; }
+
+
+
+
+    /* errors.html
+    ----------------*/
+.errorsBox          { padding: 10px; text-align: center; color: #808080; }
+
+

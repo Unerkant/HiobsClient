@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!-- standard 'head' mit css anbindung, keine javascript angebunden -->
+<head data-th-insert="~{ fragments/head :: global_head}"></head>
+<body>
+
+<!-- javascript disabled -> class:container {display:none} -->
+<noscript data-th-insert="~{fragments/noscript :: nojavascript}"></noscript>
+
+<!-- container nicht löschen, bei no script wird ausgeblendet -->
+<div class="container">
+<article class="article layout">
+    <!-- 1 ************* alles ausgaben **************** -->
+
+<div class="loginBox">
+    <div class="leer1">&#160;</div>
+  <div class="itemCenter">
+    <img src="/img/favicon310.svg" class="loginImg">
+  </div>
+    <div class="leer1">&#160;</div>
+  <h2 class="maroon itemCenter">Hiobs Post</h2>
+    <div class="leer1">&#160;</div>
+
+    <!-- Mail Fehler anzeigen -->
+    <div data-th-if="${errorsmail} == true"  class="fehler itemCenter">
+      <h3>Ung&#252;ltige E-Mail-Adresse</h3>
+      <small class="grau">Ihre E-Mail konnte nicht versandt werden</small>
+    </div>
+
+    <div class="leer1">&#160;</div>
+
+  <!-- Mail Prüfen -->
+  <div class="itemCenter">
+  <form data-th-action="@{/login/maillogin}" method="POST" class="loginForm">
+
+    <div class="leer1">&#160;</div>
+
+    <fieldset class="mailFieldset">
+      <legend>&#160;Anmelden&#160;</legend>
+      <input type="email" id="MAILINPUT" name="email"
+       class="mailInput autoWidth" placeholder="example@example.com"
+       data-th-onKeyUp="this.value = this.value.toLowerCase()" required autofocus>
+    </fieldset>
+
+    <div class="leer2">&#160;</div>
+    <button type="submit" class="loginLink">E-MAIL&#160;&#160;PR&#220;FEN</button>
+    <div class="leer3">&#160;</div>
+
+    <a href="/login/qrcode" class="loginLink">MIT&#160;&#160;QR-CODE&#160;&#160;ANMELDEN</a>
+  </form>
+  </div>
+
+</div> <!-- Ende loginBox-->
+
+    <!-- 1 ************* ende alles ausgaben **************** -->
+</article>
+</div><!-- /container -->
+</body>
+</html>

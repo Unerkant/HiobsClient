@@ -9,28 +9,35 @@ import jakarta.persistence.Id;
  */
 
 @Entity
-public class Token {
+public class Auth {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String datum;
-    private String token;
     private String mail;
+    private String other;
     private String role;
+    private Long sperrdatum;
+    private String token;
 
-    public Token(){}
+    public Auth(){}
 
-    public Token(Long id, String datum, String token, String mail, String role){
+    public Auth(Integer id, String datum, String mail, String other, String role,
+                    Long sperrdatum, String token){
         this.id         = id;
         this.datum      = datum;
-        this.token      = token;
         this.mail       = mail;
+        this.other      = other;
         this.role       = role;
+        this.sperrdatum = sperrdatum;
+        this.token      = token;
+
+
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public String getDatum() { return datum; }
     public void setDatum(String datum) { this.datum = datum; }
@@ -38,8 +45,14 @@ public class Token {
     public String getMail() { return mail; }
     public void setMail(String mail) { this.mail = mail; }
 
+    public String getOther() { return other;}
+    public void setOther(String other) { this.other = other; }
+
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+
+    public Long getSperrdatum() { return sperrdatum; }
+    public void setSperrdatum(Long sperrdatum) { this.sperrdatum = sperrdatum; }
 
     public String getToken() { return token; }
     public void setToken(String token) { this.token = token; }
@@ -47,12 +60,14 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token{" +
+        return "Auth: {" +
                 "id=" + id +
                 ", datum='" + datum + '\'' +
-                ", token='" + token + '\'' +
                 ", mail='" + mail + '\'' +
+                ", other='" + other + '\'' +
                 ", role='" + role + '\'' +
+                ", sperrdatum='" + sperrdatum + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!-- standard 'head' mit css anbindung, keine javascript angebunden -->
+<head data-th-insert="~{ fragments/head :: global_head}"></head>
+<body>
+
+<!-- javascript disabled -> class:container {display:none} -->
+<noscript data-th-insert="~{fragments/noscript :: nojavascript}"></noscript>
+
+<!-- container nicht löschen, bei no script wird ausgeblendet -->
+<div class="container">
+<article class="success layout">
+
+    <!-- 1 ************* alles ausgaben **************** -->
+  <div class="successBox">
+
+      <!-- msg anzeigen-->
+      <div id="msgDiv" class="msgBlack boxShadow">
+          <p id="msgText"></p>
+      </div>
+
+      <!-- User Daten Anzeigen -->
+      <table id="myDaten" class="successTab">
+          <caption class="captionTop">
+              <h3 class="itemCenter">Deine personenbezogenen Daten bei Hiobs Post
+                  <span class="red">*</span></h3>
+          </caption>
+          <div class="leer1">&#160</div>
+
+          <div data-th-each=" userData : ${userObject}" data-th-remove="tag">
+      <!-- Persönliche Daten -->
+          <tr>
+              <td class="successTd">Datum</td>
+              <td data-th-text="${userData.getString('datum')}">Sam</td>
+          </tr>
+          <tr>
+              <td class="successTd">Token</td>
+              <td data-th-text="${userData.getString('token')}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">Name</td>
+              <td data-th-text="${userData.getString('username')}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">Vorname</td>
+              <td data-th-text="${userData.getString('uservorname')}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">Pseudonym</td>
+              <td data-th-text="${userData.getString('pseudonym')}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">E-Mail-Adresse</td>
+              <td data-th-text="${userData.getString('email')}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">Telefon</td>
+              <td data-th-text="${userData.getString('telefon')}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">Sprache</td>
+              <td data-th-text="${userData.getString('sprache')}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">Cookie</td>
+              <td class="successOverflow" data-th-text="${userCookie}"></td>
+          </tr>
+          <tr>
+              <td class="successTd">Other</td>
+              <td data-th-text="${userData.getString('other')}"></td>
+          </tr>
+          </div>
+      </table>
+
+      <!-- Menü-->
+      <div class="leer1 successBorder">&#160;</div>
+      <div class="flexAround">
+          <div class="itemCenter">
+              <a data-th-href="@{/index}">
+                  <img src="/img/chat.svg" class="successImg">
+                  <p>Weiter</p>
+              </a>
+          </div>
+          <div class="itemCenter">
+              <a href="javascript:void(0)">
+                  <img src="/img/printer.svg" class="successImg" onClick="datenDrucken()">
+                  <p>Ducken</p>
+              </a>
+          </div>
+          <div class="itemCenter">
+              <a href="javascript:void(0)" id="downlinks" onClick="datenDownload()">
+                  <img src="/img/down.svg" class="successImg">
+                  <p id="linkstext">Download</p>
+              </a>
+          </div>
+          <div class="itemCenter">
+              <a href="javascript:void(0)" onClick="datenCopy()">
+                  <img src="/img/copy.svg" class="successImg">
+                  <p>Copy</p>
+              </a>
+          </div>
+      </div>
+
+      <!-- Datenschutz + Information -->
+      <div class="leer2">&#160;</div>
+      <small>
+          <a href="http://localhost:8050/datenschutz"
+          style="font-size: inherit; text-decoration: underline; color: #0099FF;">
+              Hiobs Post Datenschutzerkl&#228;rung</a>
+      </small>
+      <div class="leer1">&#160</div>
+      <span class="red">*</span>
+      <small class="grau">
+          Da sind alle deine Daten was sind bei Hiobs Post &#252;ber dich gespeichert
+      </small>
+
+  </div><!-- ende successBox -->
+
+    <!-- 1 ************* ende alles ausgaben **************** -->
+</article>
+</div><!-- /container -->
+
+<script type="text/javascript" src="/js/success.js"></script>
+</body>
+</html>

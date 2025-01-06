@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!-- standard 'head' mit css anbindung, keine javascript angebunden -->
+<head data-th-insert="~{ fragments/head :: global_head}"></head>
+<body>
+
+<!-- javascript disabled -> class:container {display:none} -->
+<noscript data-th-insert="~{fragments/noscript :: nojavascript}"></noscript>
+
+<!-- container nicht löschen, bei no script wird ausgeblendet -->
+<div class="container">
+<article class="article layout">
+
+    <!-- 1 ************* alles ausgaben **************** -->
+
+<div class="idcodeBox">
+    <div class="leer2">&#160;</div>
+    <div class="itemCenter">
+        <img src="/img/favicon310.svg" class="loginImgKlein">
+    </div>
+    <div class="leer1">&#160;</div>
+    <h2 class="maroon itemCenter">Hiobs Post</h2>
+    <div class="leer1">&#160;</div>
+
+   <!-- Information -->
+    <div class="idcodeInfo" >
+        <h3 class="itemCenter catalinaBlue" data-th-text="${mailadresse}"></h3>
+        <div class="leer1">&#160;</div>
+
+        <!-- Datenbank Fehler, Daten nicht gespeichert -->
+        <div data-th-if="${nosave != null && nosave.equals('nosave')}">
+            <p class="idcodeFehler">
+                Die Registrierung ist fehlgeschlagen,
+                bitte versuchen Sie es sp&#228;ter erneut.
+            </p>
+        </div>
+
+        <!-- Falsche Code, anzeigen bei return "redirect:/login/idcode"  -->
+        <div data-th-if="${falschecode != null && falschecode.equals('falschecode')}">
+            <h3 class="idcodeFehler itemCenter">FALSCHE CODE</h3>
+        </div>
+
+        <!-- Keine E-Mail in Datenbank vorhanden, neu Anmelden -->
+        <div data-th-if="${mailfinden != null && mailfinden.equals('nichtgefunden') && falschecode == null}">
+        <h3  class="itemCenter lilaLight">E-MAIL KONTO EXISTIERT NICHT!</h3>
+            <div class="leer1">&#160;</div>
+            <p class="idcodeFehler">
+                wenn Sie sich zuff&#228;lig bei E-Mail eingabe vertippt haben,
+               brechen sie den Vorgang ab und melden sie sich neu an.
+            </p>
+        </div>
+
+        <!-- E-Mail in Datenbank ist vorhanden, einloggen -->
+        <small data-th-if="${mailfinden != null && mailfinden.equals('gefunden') && falschecode == null}" class="grau">
+            Vielen Dank, bitte &#252;berpr&#252;fen Sie Ihr E-Mail-Postfach!
+            Wir haben Ihnen eine Best&#228;tigungsmail an die von Ihnen angegebene E-Mail-Adresse gesendet.<br>
+            Bitte pr&#252;fen Sie auch Ihren SPAM-Ordner,
+            falls Sie in den n&#228;chsten Minuten keine Best&#228;tigung Code erhalten haben!<br>
+            Vielen Dank und mit freundlichen Gr&#252;&#223;en!<br> Ihr Hiobs Team
+        </small>
+
+        <br><br>
+        <a data-th-href="@{/}" style="color: red;">Abbrechen</a>
+    </div>
+    <div class="leer2">&#160;</div>
+
+    <div data-th-if="${codeblock < 4}" class="idcodeForm">
+        <form data-th-action="@{/login/save}" method="POST">
+        <div class="flexAround">
+            <div class="idcodeInputBox">
+            <input type="text" id="CODE1" name="codeEins" size="1" class="idcodeInput shadowInput"
+                    onkeyup="this.value=this.value.replace(/[^0-9]/g,'');
+                    if(this.value.length == 1){ document.getElementById('CODE2').focus();}"
+                    minlength="1" maxlength="1" required="required" autofocus>
+            </div>
+            <div class="idcodeInputBox">
+            <input type="text" id="CODE2" name="codeZwei" size="1" class="idcodeInput shadowInput"
+                   onkeyup="this.value=this.value.replace(/[^0-9]/g,'');
+                   if(this.value.length == 1){ document.getElementById('CODE3').focus();}"
+                   minlength="1" maxlength="1" placeholder="-" required="required">
+            </div>
+            <div class="idcodeInputBox">
+            <input type="text" id="CODE3" name="codeDrei" size="1" class="idcodeInput shadowInput"
+                   onkeyup="this.value=this.value.replace(/[^0-9]/g,'');
+                   if(this.value.length == 1){ document.getElementById('CODE4').focus();}"
+                   minlength="1" maxlength="1" placeholder="-" required="required">
+            </div>
+            <div class="idcodeInputBox">
+            <input type="text" id="CODE4" name="codeVier" size="1" class="idcodeInput shadowInput"
+                   onkeyup="this.value=this.value.replace(/[^0-9]/g,'');
+                   if(this.value.length == 1){ document.getElementById('BUTCODE').focus();}"
+                   minlength="1" maxlength="1" placeholder="-" required="required">
+            </div>
+        </div>
+
+    <div class="leer2">&#160;</div>
+        <input type="hidden" data-th-value="${mailadresse}" name="usermail">
+            <!-- userdaten → 'gefunden' oder 'nichtgefunden' -->
+        <input type="hidden" data-th-value="${mailfinden}" name="mailfund">
+        <div>
+            <button id="BUTCODE" type="submit" class="loginLink"
+            data-th-text="${mailfinden != null && mailfinden.equals('nichtgefunden')} ?
+                            'NEU&#160;&#160;REGISTRIEREN' : 'ANMELDEN' ">ANMELDEN</button>
+        </div>
+        </form>
+    </div>
+</div>
+
+    <!-- 1 ************* ende alles ausgaben **************** -->
+
+</article>
+</div><!-- /container -->
+</body>
+</html>

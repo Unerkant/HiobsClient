@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head data-th-insert="~{ fragments/head :: global_head }"></head>
+
+<body>
+
+<div class="container">
+  <article class="sperre">
+  <div class="sperreBox">
+      <div class="itemCenter">
+          <img src="/img/favicon310.svg" width="150" height="150">
+      </div>
+   <h3 id="entsperrText" class="itemCenter catalinaBlue">ihrer Account ist vorübergehend gesperrt</h3>
+      <div class="leer2">&#160;</div>
+
+    <div class="sperreCountdown">
+      <input type="hidden" id="sperrMillis"  data-th-value="${sperreInMillis}" disabled>
+      <div class="flexCenter" id="sperrCountdown">00-00-0000 00:00:00</div>
+    </div>
+
+    <div class="leer2">&#160;</div>
+
+      <div id="entsperrDatum" class="itemCenter grauMittel"></div>
+
+    <div>&#160;</div>
+
+    <p class="sperreText layout"><strong class="darkred">*</strong>
+      <small class="grau">
+      Wenn du gegen diese Nutzungsbedingungen oder unsere Richtlinien verstößt, wenn du wiederholt
+      die Rechte am geistigen Eigentum anderer verletzt oder wenn wir gesetzlich dazu verpflichtet sind,
+      können wir – unbeschadet unseres Kündigungsrechts aus wichtigem Grund – die
+      Bereitstellung des Dienstes für dich ganz oder teilweise verweigern oder einstellen.
+      </small>
+    </p>
+  </div>
+
+  </article>
+</div>
+
+<!-- ende container -->
+
+<script data-th-if="${sperrJS}" data-th-src="@{/js/sperreCountdown.js}"></script>
+</body>
+</html>

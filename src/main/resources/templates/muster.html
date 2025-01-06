@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!-- standard 'head' mit css anbindung, keine javascript angebunden -->
+<head data-th-insert="~{ fragments/head :: global_head}"></head>
+<body>
+
+<!-- javascript disabled -> class:container {display:none} -->
+<noscript data-th-insert="~{fragments/noscript :: nojavascript}"></noscript>
+
+<!-- container nicht löschen, bei no script wird ausgeblendet -->
+<div class="container">
+
+<article>
+    <!-- 1 ************* alles ausgaben **************** -->
+
+
+
+    <!-- 1 ************* ende alles ausgaben **************** -->
+</article>
+
+</div><!-- /container -->
+</body>
+</html>
