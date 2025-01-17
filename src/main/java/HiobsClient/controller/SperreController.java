@@ -82,6 +82,7 @@ public class SperreController {
          * in der H2 datenbank hiobsClient/Auth spalte 'sperrdatum', auf null setzten (null voraussetzung)
          *
          * return: 1 oder null
+         * return: sperreCountdown.js/fetch zum Weiterleiten
          */
         Integer result = authService.sperreUpdate(null );
 

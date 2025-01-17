@@ -4,23 +4,20 @@
  *  Den 30.09.2024
  */
 
- var connectAnzeige = document.querySelector('#connectAnzeige');
- var connectBox     = document.querySelector('#connectBox');
- var messageBox     = document.querySelector('#messageBox');
- var mitWemVerbunden= document.querySelector('#mitWemVerbunden');
- var recipientName  = document.querySelector('#recipientName');
- var messageText    = document.querySelector('#messageText');
- var messageAusgabe = document.querySelector('#messageAusgabe');
+
+/**
+ * BENUTZT: index.html
+ */
+ var connectAnzeige = document.getElementById('connectAnzeige');
+ var connectBox     = document.getElementById('connectBox');
+ var messageBox     = document.getElementById('messageBox');
+ var mitWemVerbunden= document.getElementById('mitWemVerbunden');
+ var recipientName  = document.getElementById('recipientName');
+ var messageText    = document.getElementById('messageText');
+ var messageAusgabe = document.getElementById('messageAusgabe');
 
  var stompClient    = null;
  var userName       = null;
-
- var colors         = [
-    '#2196F3', '#32C787', '#00BCD4', '#FF5652',
-    '#FFC107', '#FF85AF', '#FF9800', '#39BBB0'
- ];
-
-
 
  function onConnect() {
 
@@ -28,8 +25,9 @@
         stompClient.disconnect();
     }
 
-    userName = document.querySelector('#userName').value.trim();
+    userName = document.getElementById('userName').value.trim();
 
+    //var socket = new SockJS("http://194.164.63.85:8080/register");
     var socket = new SockJS("http://localhost:8080/register");
     stompClient = Stomp.over(socket);
 

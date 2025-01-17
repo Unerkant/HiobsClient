@@ -36,6 +36,6 @@ public class WebConfig {
     public final String FILE_CSS                = "/static/css/style.css";
     public final String FILE_URL                = "???";
     public final String FILE_HTTP               = "http://localhost:8080/";
-    /* public final String FILE_HTTP               = "http://hiobspost.de/"; */
+    //public final String FILE_HTTP               = "http://194.164.63.85:8080/";
     /* Bild Adresse BEI BOTE:  http://localhost:8080/profilbild/03052022103644.png */
 }
