@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.json.JSONObject;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.net.http.HttpResponse;
 
 
@@ -41,13 +43,18 @@ public class MailLoginController {
 
 
     @GetMapping(value = "/login/maillogin")
-    public String getMail(HttpServletRequest request, Model model) {
+    public ModelAndView getMail(HttpServletRequest request, Model model) {
+
+        // auf anmeldung prüfen
+        if (authService.authToken() == null) {
+            return new ModelAndView("login/maillogin");
+        }
+
 
         model.addAttribute("errorsmail", mailerrors);
+        //System.out.println("GET, Mail Login: " + authService.authToken());
 
-        //System.out.println("GET, Mail Login: " + codeVersuch);
-
-        return authService.authDaten() == null ? "login/maillogin" : "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 
 
@@ -75,7 +82,7 @@ public class MailLoginController {
     public String getPost(HttpServletRequest request, Model model) {
 
         // Sicherheitscode versenden
-        String loginLink = webConfig.FILE_HTTP+"loginMail";
+        String loginLink = webConfig.SERVER_HTTP+"loginMail";
         String email = request.getParameter("email");
         HttpResponse<String> response = apiService.requestApi(loginLink, email);
 
@@ -136,7 +143,7 @@ public class MailLoginController {
         String userMail = request.getParameter("usermail");
         String mailFund = request.getParameter("mailfund");
 
-        String codeLink = webConfig.FILE_HTTP+"loginSave";
+        String codeLink = webConfig.SERVER_HTTP+"loginSave";
         String userSend = "{\"email\": \""+userMail+"\", \"other\": \""+total+"\", \"role\": \""+mailFund+"\"}";
 
         // Daten an HiobsServer senden zum ApiLoginController/@PostMapping(value = "/loginSave")
@@ -198,7 +205,7 @@ public class MailLoginController {
             auth.setSperrdatum(sperre);
 
             Auth loginAuth = authService.loginSave(auth);
-            //System.out.println("Success: " + auth);
+            //System.out.println("Success: " + loginAuth);
 
             model.addAttribute("userObject", object);
             model.addAttribute("userCookie", cookie);
@@ -223,7 +230,7 @@ public class MailLoginController {
      */
     private void fehlerMelden(int statusCode, String fehlerQuelle, String fehlerText ) {
 
-        String fehlerLink = webConfig.FILE_HTTP+"exception";
+        String fehlerLink = webConfig.SERVER_HTTP+"exception";
         Exception except = new Exception();
 
         except.setDatum(myUtilities.deDatum());

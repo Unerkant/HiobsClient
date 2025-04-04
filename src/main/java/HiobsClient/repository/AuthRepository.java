@@ -1,7 +1,6 @@
 package HiobsClient.repository;
 
 import HiobsClient.model.Auth;
-import jakarta.annotation.Nonnull;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

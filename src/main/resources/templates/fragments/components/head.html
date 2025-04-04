@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<!-- Login Head mit login.css, für alle Login Seiten-->
+<th:block data-th-fragment="login_head">
+  <title data-th-text="${@environment.getProperty('info.groupId')}"></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" data-th-href="@{/img/favicon32.ico}">
+  <link rel="stylesheet" data-th-href="@{/css/login.css}">
+  <script type="text/javascript" data-th-src="@{/js/functions.js}"></script>
+</th:block>
+
+
+<!-- Chat Head mit chat.css, für alle Chat Seiten(nach Registrierung/Einloggen) -->
+<th:block data-th-fragment="chat_head">
+  <title data-th-text="${@environment.getProperty('info.groupId')}"></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" data-th-href="@{/img/favicon32.ico}">
+  <link rel="stylesheet" data-th-href="@{/css/chat.css}">
+  <link rel="stylesheet" data-th-href="@{/css/fragments.css}">
+  <script type="text/javascript" data-th-src="@{/js/functions.js}"></script>
+</th:block>
+
+</html>

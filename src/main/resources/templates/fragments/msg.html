@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="msgfragment">
+
+<div class="fragmentBox">
+    <div class="gridBox">
+
+        <!-- Msg Header -->
+        <div class="fragmentHeader">
+            <table class="frMsgHeaderTab">
+                <tr>
+                    <!-- Close Button -->
+                    <td class="frMsgHeaderClose">
+                        <a class="clickClose" data-th-href="@{/msg}">
+                            <img src="/img/close.svg" width="26">
+                        </a>
+                        <a class="clickBack" data-th-onClick="rightHide('msg')">
+                            <img src="/img/linksblau.svg" width="26">
+                        </a>
+                    </td>
+                    <!-- User Bild -->
+                    <td class="frMsgHeaderBild">
+                        <img src="/img/userBlau.svg" width="40">
+                    </td>
+                    <!-- User Name + online zeit -->
+                    <td data-th-id="${msgToken}" class="frMsgHeaderUser textEllipsis"
+                        data-th-onClick="otherRequest('/userInfo',[[${msgToken}]])">
+
+                        <strong>User Name</strong>
+                        <br>
+                        <small class="textGrau" >zul. online vor 5 Stunden und noch</small>
+
+                    </td>
+                    <!-- Telephone -->
+                    <td class="frMsgHeaderPhone">
+                        <img src="/img/phoneblau.svg" width="26">
+                    </td>
+                    <!-- Suchen function -->
+                    <td class="frMsgHeaderSuche">
+                        <img src="/img/sucheblau.svg" width="26">
+                    </td>
+                    <!-- Drop-Menü -->
+                    <td class="frMsgHeaderMenu">
+                        <img src="/img/punktenblau.svg" width="26">
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- gridBox -> item 1(Header) -->
+
+        <!-- Msg Body -->
+        <div class="fragmentBody">
+            <br>
+            <br>
+            <br>
+            <h2 align="center"> MSG Fragment(body)</h2>
+        </div><!-- gridBox -> item 2(Body) -->
+
+        <!-- Msg Footer -->
+        <div class="fragmentFooter">
+            <input name="text" type="text" placeholder="Schreibe eine Nachricht..." style=" width: 100%; padding: 5px; autofocus">
+        </div><!-- gridBox -> item 3 (Footer) -->
+
+    </div><!-- Ende gridBox -->
+</div>
+
+</th:block>
+
+</html>

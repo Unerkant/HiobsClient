@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Den 31.10.2024
@@ -15,7 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class ErrorsController {
 
     @GetMapping(value = {"/{errLink}", "/index/{errLink}", "/login/{errLink}"})
-    public String getErrors(@PathVariable("errLink") String errLink, Model model) {
+    public ModelAndView errors(@PathVariable("errLink") String errLink, Model model) {
 
         /**
          * URL auslesen...(nur anzeige in errors.html)
@@ -24,6 +25,6 @@ public class ErrorsController {
         StringBuffer path = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getRequestURL();
         model.addAttribute("linkName", path);
 
-        return "errors";
+        return new ModelAndView("errors");
     }
 }

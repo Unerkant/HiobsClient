@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.net.http.HttpResponse;
 
 /**
@@ -27,7 +29,7 @@ public class SperreController {
 
 
     @GetMapping(value = "/sperre")
-    public String getSperre(Model model) {
+    public ModelAndView getSperre(Model model) {
 
         /**
          * Prüfen, ob sperrzeit vorhanden ist
@@ -43,13 +45,14 @@ public class SperreController {
         if (sperrInMillis != null) {
             model.addAttribute("sperreInMillis", sperrInMillis);
             model.addAttribute("sperrJS", sperrInMillis);
+            return new ModelAndView("sperre");
         }
 
         /**
          * sperrInMillis: 1732392960000 → bei vorhandenen sperrdatum
          *                null →  zurück zum IndexController
          */
-        return sperrInMillis != null ? "sperre" : "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 
 
@@ -73,7 +76,7 @@ public class SperreController {
          * MYSQL: globalHiobs/Usern/ spalte 'sperrdatum', auf null setzen
          */
         String token = authService.authToken();
-        String link = webConfig.FILE_HTTP+"sperreDeleteApi";
+        String link = webConfig.SERVER_HTTP+"sperreDeleteApi";
         HttpResponse<String> output = apiService.requestApi(link, token);
 
         /**

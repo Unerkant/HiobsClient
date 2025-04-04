@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:custom="http://www.w3.org/1999/xhtml">
+
+<th:block data-th-fragment="ordnerVertikal">
+
+    <div id="ORDNERROWS" class="vertikalBox vertikalGrid">
+
+        <!-- Zurzeit Leer, in Zukunft für Information -->
+        <div id="ORDNERHEADER" class="vertikalHeader">
+            <div class="leer0">&#160;</div>
+            <div class="vertikalClick">
+                <figure class="vertikalFigure">
+                    <img data-th-src="@{/img/ordners/ordnerChatGrau.svg}"
+                         data-th-onmouseover=" @{this.src='/img/ordners/ordnerChatWeiss.svg'} "
+                         data-th-onmouseout=" @{this.src='/img/ordners/ordnerChatGrau.svg'} "
+                         class="vertikalImg">
+                </figure>
+                <p class="vertikalName">Chats</p>
+            </div>
+        </div>
+
+        <!-- Alle erstellten Ordner anzeigen -->
+        <div id="ORDNERBODY" class="vertikalBody">
+            <div class="vertikalClick">
+                <figure class="vertikalFigure">
+                    <img data-th-src="@{/img/ordners/ordnerGrau.svg}" class="vertikalImg">
+                </figure>
+                <p class="vertikalName">Xios</p>
+            </div>
+        </div>
+
+        <!-- Direkt Einstellung öffnen (setting)-->
+        <div id="ORDNERBOTTOM" class="vertikalFooter">
+
+            <!-- Einstellung öffnen -->
+            <div class="vertikalClick">
+                <form data-th-action="@{/settings}" method="POST">
+                    <input type="hidden" name="fragmentsNames" data-th-value="ordnerEinstellung">
+                    <button class="vertikalButton">
+                    <img data-th-src="@{/img/ordners/ordnerSliderGrau.svg}"
+                         data-th-onmouseover=" @{this.src='/img/ordners/ordnerSliderWeiss.svg'} "
+                         data-th-onmouseout=" @{this.src='/img/ordners/ordnerSliderGrau.svg'} "
+                         class="vertikalImg">
+                    </button>
+                </form>
+            </div>
+            <div class="leer1">&#160;</div>
+        </div>
+    </div>
+
+</th:block>
+
+</html>

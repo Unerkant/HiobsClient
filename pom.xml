@@ -5,21 +5,21 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.1</version>
+		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>HiobsPost</groupId>
 	<artifactId>HiobsClient</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<name>HiobsClient</name>
 	<description>hiobspost</description>
 
 	<properties>
-		<java.version>21</java.version>
+		<java.version>23</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.source>21</maven.compiler.source>
-		<maven.compiler.target>21</maven.compiler.target>
+		<maven.compiler.source>23</maven.compiler.source>
+		<maven.compiler.target>23</maven.compiler.target>
 	</properties>
 
 
@@ -27,18 +27,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>3.4.1</version>
+			<version>3.4.4</version>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin.external.google</groupId>
+					<artifactId>android-json</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>3.4.1</version>
+			<version>3.4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-			<version>3.4.1</version>
+			<version>3.4.4</version>
 		</dependency>
 
 
@@ -46,12 +52,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
-			<version>6.2.1</version>
+			<version>6.2.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
-			<version>6.2.1</version>
+			<version>6.2.5</version>
 		</dependency>
 
 		<!-- json -->
@@ -66,8 +72,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>3.4.1</version>
+			<version>3.4.4</version>
 		</dependency>
+		<!-- Fehler: Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)'] -->
+		<!-- Database driver: undefined/unknown, Database version: 2.3.232 ... -->
+		<!-- kein Fehler bei ver. 6.5.3.Final  -->
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -79,17 +88,6 @@
 			<version>2.3.232</version>
 		</dependency>
 
-		<!--
-    		Mockito ist ein Mocking-Framework für JUnit.
-    		Es simuliert das Verhalten eines realen Objektes oder einer realen Methode.
-		-->
-		<!-- für dieses Project blendet den Fehler aus: Java HotSpot(TM) 64-Bit Server VM warning: -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>4.5.1</version>
-		</dependency>
-
 	</dependencies>
 
 	<!-- für jar-datei erstellung, -->
@@ -98,12 +96,24 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.4.1</version>
+				<version>3.4.4</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.3.1</version>
+			</plugin>
+			<!-- für dieses Project blendet den Fehler aus: Java HotSpot(TM) 64-Bit Server VM warning: -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.2</version>
+				<configuration>
+					<argLine>
+						-javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar
+						-Xshare:off
+					</argLine>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="Fragment Name">
+
+    <div class="layout" style="...">
+        <!-- mach was -->
+    </div>
+    <style>
+        // style
+    </style>
+
+</th:block>
+
+</html>
+
+
+
+<!-- Click in Header, soll zu resize.js aktuelle Setting-Category zusenden, (MSG, Setting, phone oder user)  -->
+<!-- weil: bei schliessen seite wird immer neu aktualisiert, wenn bin, ich bei setting soll auch setting weiter zeigen  -->
+<a class="clickClose" data-th-href="@{/setting}"><!-- SettingController.java-->
+    <img src="/img/close.svg" width="26">
+</a>
+<a class="clickBack" data-th-onClick="rightHide('setting')"><!-- rightHide -> resize.js -->
+    <img src="/img/linksblau.svg" width="26">
+</a>
+
+<!-- Fragment von 2 Reihe anzeigen, ERFORDERLICH: link zu @PostMapping + User Token -->
+<td data-th-id="${msgToken}" class="frMsgHeaderUser textEllipsis"
+    data-th-onClick="otherRequest('/userInfo',[[${msgToken}]])"><!-- otherFragment.js -->
+
+<!-- Fragment von 2 reihe schliessen -->
+<a class="finger" data-th-onClick="otherHide()"><!-- otherHide() -> otherFragment.js -->
+
+
+<!-- Bild Attrappe mit Buchstaben, class anpassen aber nicht flexCenter -->
+<figure class="flexCenter frSettingProfilFigure">
+    <h3 class="flexCenter frSettingProfilCircle">WM</h3>
+</figure>
+
+<!-- Bild Button + hover -->
+    <button class="vertikalButton">
+        <!-- Frei Gestalten -->
+        <img data-th-src="@{/img/ordners/ordnerSliderGrau.svg}"
+             data-th-onmouseover=" @{this.src='/img/ordners/ordnerSliderWeiss.svg'} "
+             data-th-onmouseout=" @{this.src='/img/ordners/ordnerSliderGrau.svg'} "
+             class="vertikalImg">
+    </button>
+
+<!-- Post Request-->
+<form class="leftEinladenForm" data-th-action="@{/einladens}" method="POST">
+    <input type="hidden" name="fragmentsNames" data-th-value="freundEinladen">
+    <button class="leftEinladenButton">einladen</button>
+</form>

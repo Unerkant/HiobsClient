@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="editprofilefragment">
+
+<div id="EDITPROFIL" class="fragmentBox nichtmarkieren">
+
+    <div class="fragmentGrid">
+
+        <!-- 1 Grid, Profil Header-->
+        <div class="fragmentHeader">
+            <table class="frCategoryHeaderTab">
+               <tr>
+                   <td class="frCategoryHeaderLeft">
+                       <a class="clickClose" data-th-href="@{/setting}">
+                           <img src="/img/close.svg" width="22" class="middles">
+                       </a>
+                       <a class="clickBack" data-th-onClick="rightHide('setting')"><!-- rightHide -> resize.js -->
+                           <img src="/img/linksblau.svg" width="20" class="middles">
+                           <span class="textBlau bottoms">Zur&#252;ck</span>
+                       </a>
+                   </td>
+                   <td class="frCategoryHeaderCentr">
+                       <strong>Profil Bearbeiten</strong>
+                   </td>
+                   <td class="frCategoryHeaderRight">&#160;</td>
+               </tr>
+            </table>
+        </div>
+
+        <!-- 2 Grid, Profil Body -->
+        <div class="fragmentBody backGround">
+        <div class="frCategoryBody fragmentLayout">
+        <!-- Table-Box -->
+        <div class="frCategoryBodyItem">
+            <table class="frCategoryBodyTab">
+                <tr>
+                    <td class="frCategoryEinTd">Konto hinzuf&#252;gen</td>
+                </tr>
+                <tr><td class="frCategoryTr"><hr class="hrLine"></td></tr>
+                <tr data-th-onClick="return dropBox('PROFILABMELDEN', 'profilAbmeldenOpen', event)">
+                    <td class="frCategoryEinTd textRot">Abmelden</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="leer7">1</div>
+        <div class="leer7">2</div>
+        <div class="leer7">3</div>
+        <div class="leer7">4</div>
+        <div class="leer7">5</div>
+        <div class="leer7">6</div>
+        <div class="leer7">7</div>
+        <div class="leer7">8</div>
+
+        </div><!-- Ende Layout -->
+        </div><!-- Ende fragmentBody -->
+
+    </div><!-- Ende Fragment Grid -->
+
+    <!-- Pop-up-Fenster Abmelden als Fragment: fragments/components/profilabmelden -->
+    <th:block data-th-insert="~{ fragments/components/profilabmelden :: profilAbmelden }" ></th:block>
+
+</div><!-- Ende fragmentBox -->
+
+</th:block>
+
+</html>

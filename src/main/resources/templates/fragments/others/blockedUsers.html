@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="blockedUsersFragment">
+
+  <div class="fragmentBox">
+    <div class="fragmentGrid">
+
+      <!-- Profil Header -->
+      <div class="fragmentHeader">
+        <table class="frCategoryHeaderTab">
+          <tr>
+            <td class="frCategoryHeaderLeft">
+              <a class="finger" data-th-onClick="otherHide()"><!-- otherHide -> otherFragment.js -->
+                <img src="/img/linksblau.svg" class="middles" width="20">
+                <span class="textBlau bottoms">Zur&#252;ck</span>
+              </a>
+            </td>
+            <td class="frCategoryHeaderCentr">
+              <strong>Blockierte Nutzer</strong>
+            </td>
+            <td class="frCategoryHeaderRight">&#160;</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Profil Body -->
+      <div class="fragmentBody">
+        <p class="leer2" >&#160;</p>
+        <h2>Blockerte Nutzer</h2>
+        <p class="leer2">&#160;</p>
+        <h3 data-th-text="${blockedUrl}"></h3>
+      </div>
+
+    </div><!-- Ende Fragment Grid -->
+  </div>
+
+</th:block>
+</html>

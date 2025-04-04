@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="settingfragment">
+
+<div class="gridHeader fragmentBox nichtmarkieren">
+  <!-- 1 Grid, Header -->
+  <div class="fragmentHeader">
+    <table class="frSettingHeader">
+      <tr>
+        <td class="frSettingHeaderLeft">&#160;</td>
+        <td class="frSettingHeadCentr">
+          <h3>Einstellungen</h3>
+        </td>
+        <td class="frSettingHeaderLeft">&#160;</td>
+      </tr>
+    </table>
+  </div><!-- Ende Header -->
+
+  <!-- 2 Grid, Body -->
+  <div class="fragmentBody frSettingBody">
+    <!-- Profil -->
+    <table class="frSettingProfilTab" data-th-onClick="window.location.href = '/setting/editprofile'"
+           data-th-classappend="${profilActiv} == 'editprofile' ? 'frSettingHover' : '' ">
+      <tr>
+        <td rowspan="2" class="frSettingProfilBild">
+          <figure class="flexCenter frSettingProfilFigure">
+            <h3 class="flexCenter frSettingProfilCircle">WM</h3>
+          </figure>
+        </td>
+        <td class="frSettingProfilName textEllipsis">
+          <strong>Sam</strong>
+          &#91;<span data-th-text="${settingRequestUri}"></span>&#93;
+        </td>
+        <td rowspan="2" class="frSettingProfilInfo">
+          <figure class="frSettingInfoZeichen">
+            <img src="/img/ausrufezeichen.svg" class="middles" width="20">
+          </figure>
+        </td>
+        <td rowspan="2" class="frSettingRightFail">
+          <!-- background-image: fail, rechts -->
+        </td>
+      </tr>
+      <tr>
+        <td class="frSettingProfilMail textEllipsis">
+          <small class="textGrau">example@example.com </small>
+        </td>
+      </tr>
+    </table>
+
+    <div class="leer1">&#160;</div>
+
+    <!-- Allgemeine Information Ausgabe (Versteckt) -->
+    <div class="frSettingInfoShow">
+      <small>Hier werden von HiobsClien an dich die Nachrichten angezeigt</small>
+    </div>
+
+    <div class="leer1">&#160;</div>
+
+    <!-- Profil Information -->
+    <table class="frSettingTab">
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/profileinfo'"
+          data-th-classappend="${profilActiv} == 'profileinfo' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/ich.svg" width="30" class="middles">
+        </td>
+        <td class="frSettingOptionName">
+          <span>Info</span>&#160;<small class="frSettingNeu">NEU</small>
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+    </table>
+
+    <div class="leer2">&#160;</div>
+
+    <!-- BLOCK ALLGEMEIN -->
+    <table class="frSettingTab">
+      <!-- Allgemein -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/generally'"
+          data-th-classappend="${profilActiv} == 'generally' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/allgemein.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Allgemein
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Darstellung -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/depiction'"
+          data-th-classappend="${profilActiv} == 'depiction' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/darstellung.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Darstellung
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Daten und Speicher -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/savedata'"
+          data-th-classappend="${profilActiv} == 'savedata' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/speicher.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Daten und Speichern
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Privatsphäre & Sicherheit -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/security'"
+          data-th-classappend="${profilActiv} == 'security' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/schloss.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Privatsphäre und Sicherheit
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Mitteilung & Tönen -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/sounds'"
+          data-th-classappend="${profilActiv} == 'sounds' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/lautsprecher.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Mitteilungen und Töne
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+    </table>
+
+    <div class="leer2">&#160;</div>
+    <!-- BLOCK Geräte -->
+    <table class="frSettingTab">
+
+      <!-- Geräte -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/devices'"
+          data-th-classappend="${profilActiv} == 'sounds' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/laptop.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Ger&#228;te
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Sprache -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/language'"
+          data-th-classappend="${profilActiv} == 'sounds' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/glob.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Sprache
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau" data-th-text="${land}"></span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Ordner -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/folder'"
+          data-th-classappend="${profilActiv} == 'sounds' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/ordner.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Ordner
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Sticker & Emoji -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/smile'"
+          data-th-classappend="${profilActiv} == 'sounds' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/emoji.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Sticker & Emoji
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+    </table>
+
+    <div class="leer2">&#160;</div>
+    <!-- 3 BLOCK FAQ -->
+    <table class="frSettingTab">
+
+      <!-- FAQ -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/faq'"
+          data-th-classappend="${profilActiv} == 'sounds' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/faq.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Hiobs FAQ
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+      <!-- Frage Stellen -->
+      <tr class="frSettingTabTr" data-th-onClick="window.location.href = '/setting/support'"
+          data-th-classappend="${profilActiv} == 'sounds' ? 'frSettingHover' : '' ">
+        <td class="frSettingIcon">
+          <img src="/img/settings/support.svg" class="middles" width="30">
+        </td>
+        <td class="frSettingOptionName">
+          Eine Frage stellen
+        </td>
+        <td class="frSettingInfo textEllipsis">
+          <span class="textGrau">&#160;</span>
+        </td>
+        <td class="frSettingRightFail">
+          <!-- IMG '>' ist als hintergrund-image integriert  -->
+        </td>
+      </tr>
+
+    </table>
+
+    <div class="leer1">&#160;</div>
+    <!-- Version anzeige-->
+    <p class="textGrau" data-th-text=" '&#160;&#160;&#160;'+${version}"></p>
+
+  </div><!-- Ende Body -->
+
+</div><!-- Ende Grid header -->
+
+</th:block>
+
+</html>

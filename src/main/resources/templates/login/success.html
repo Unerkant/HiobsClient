@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <!-- standard 'head' mit css anbindung, keine javascript angebunden -->
-<head data-th-insert="~{ fragments/head :: global_head}"></head>
+<head data-th-insert="~{ fragments/components/head :: login_head}"></head>
 <body>
 
 <!-- javascript disabled -> class:container {display:none} -->
-<noscript data-th-insert="~{fragments/noscript :: nojavascript}"></noscript>
+<noscript data-th-insert="~{fragments/components/noscript :: nojavascript}"></noscript>
 
 <!-- container nicht löschen, bei no script wird ausgeblendet -->
 <div class="container">
@@ -16,8 +16,8 @@
   <div class="successBox">
 
       <!-- msg anzeigen-->
-      <div id="msgDiv" class="msgBlack boxShadow">
-          <p id="msgText"></p>
+      <div id="SUCCESSPOPUP" class="msgBlack boxShadow">
+          <p id="SUCCESSTEXT"></p>
       </div>
 
       <!-- User Daten Anzeigen -->
@@ -77,26 +77,26 @@
       <div class="leer1 successBorder">&#160;</div>
       <div class="flexAround">
           <div class="itemCenter">
-              <a data-th-href="@{/index}">
-                  <img src="/img/chat.svg" class="successImg">
+              <a data-th-href="@{/}">
+                  <img src="/img/logins/chat.svg" class="successImg">
                   <p>Weiter</p>
               </a>
           </div>
           <div class="itemCenter">
               <a href="javascript:void(0)">
-                  <img src="/img/printer.svg" class="successImg" onClick="datenDrucken()">
+                  <img src="/img/logins/printer.svg" class="successImg" onClick="datenDrucken()">
                   <p>Ducken</p>
               </a>
           </div>
           <div class="itemCenter">
               <a href="javascript:void(0)" id="downlinks" onClick="datenDownload()">
-                  <img src="/img/down.svg" class="successImg">
+                  <img src="/img/logins/down.svg" class="successImg">
                   <p id="linkstext">Download</p>
               </a>
           </div>
           <div class="itemCenter">
               <a href="javascript:void(0)" onClick="datenCopy()">
-                  <img src="/img/copy.svg" class="successImg">
+                  <img src="/img/logins/copy.svg" class="successImg">
                   <p>Copy</p>
               </a>
           </div>
@@ -105,7 +105,7 @@
       <!-- Datenschutz + Information -->
       <div class="leer2">&#160;</div>
       <small>
-          <a href="http://localhost:8050/datenschutz"
+          <a href="http://localhost:8050/datenschutz" target="_blank"
           style="font-size: inherit; text-decoration: underline; color: #0099FF;">
               Hiobs Post Datenschutzerkl&#228;rung</a>
       </small>

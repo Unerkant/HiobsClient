@@ -14,7 +14,7 @@
     navigator.clipboard.writeText(copyText.innerText);
 
     // Information anzeigen (head -> functions.js)
-    msgShow("Somit ist der Text in der Zwischenablage gespeichert.");
+    msgVisible("SUCCESSPOPUP", "SUCCESSTEXT", "Somit ist der Text in der Zwischenablage gespeichert.");
 
  }
 
@@ -40,7 +40,7 @@
     downLinks.style = "pointer-events: none; color: red";
     linksText.textContent = "Heruntergeladen";
 
-    msgShow("Heruntergeladene Dateien sind im Ordner Downloads gespeichert");
+    msgVisible("SUCCESSPOPUP", "SUCCESSTEXT", "Heruntergeladene Dateien sind im Ordner Downloads gespeichert");
  }
 
 
@@ -50,5 +50,5 @@
  function datenDrucken() {
 
     window.print();
-    msgShow("Daten sind bereit zum Dr&#252;cken");
+    msgVisible("SUCCESSPOPUP", "SUCCESSTEXT", "Daten sind bereit zum Dr&#252;cken");
  }

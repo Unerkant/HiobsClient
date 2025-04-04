@@ -1,0 +1,203 @@
+/**
+ * Den 25.01.2024
+ */
+
+    /* Allgemein für Fragments
+     --------------------------ä*/
+ .fragmentBox        { background-color: #FFFFFF; height: 100%; }
+ .fragmentGridBox    { display: grid; height: 100%; grid-template-rows: auto 1fr auto;}  /* header + body + bottom */
+ .fragmentGrid       { display: grid; height: 100%; grid-template-rows: 3.125rem 1fr; }  /* Grid: header + body */
+ .fragmentColumns    { display: grid; grid-template-columns: auto 1fr auto; }            /* left + center + right */
+ .fragmentHeader     { background-color: #FAFAFA; border-bottom: 1px solid #EAEAEA; }    /* header */
+ .fragmentFooter     { background-color: #FAFAFA; border-top: 1px solid #EAEAEA; }       /* footer */
+ .fragmentBody       { overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; }  /* nicht löschen */
+ .fragmentLayout     { margin-left: auto; margin-right: auto; }
+
+    /*ORDNER(left): Fragments:: ordnermenu -> ordnerVertikal
+     ------------------------------------------------------ */
+.vertikalCenter     { display: flex; justify-content: center; }
+.vertikalGrid       { display: grid; height: 100%; grid-template-rows: auto 1fr auto; }
+.vertikalBox        { background-color: #364150; width: 4.375rem; max-width: 4.375rem;}
+.vertikalHeader     { }
+.vertikalBody       { }
+.vertikalFooter     { }
+.vertikalClick      { margin: 2px 0; }
+.vertikalFigure     { padding-top: 0.6rem; }
+.vertikalButton     { background: inherit; width: 4.375rem; border: thin solid #29313D; padding: 0.5rem 0;}
+.vertikalImg        { display: block; margin: auto; width: 2.0rem; height: 2.0rem; }
+.vertikalName       { color: #B3B3B3; text-align: center; font-size: 0.8rem; }
+
+    /*LEFT-FOOTER: Fragments/components:: footer Menü Bar
+      ---------------------------------*/
+.frMenuBar          { padding: 1px 1px 0;}
+.frMenuTable        { width: 100%; height: 3.125rem; padding: 0; border: 0; }
+.frMenuTd           { width: 24.99999%; text-align: center; }
+.frMenuAhref        { display: inline-block; position: relative; padding: 0 1.0rem; }
+.frMenuCountFalse   { position: absolute; top: 0; left:50%; font-size: 0;  }
+.frMenuCountTrue    { position: absolute; top: 0; left: 50%; width: 1.0rem; height: 1.0rem; font-size: inherit;
+                      background-color: #FF0000; border: 1px solid #FFF; border-radius: 50%; color: #FFFFFF;
+                      padding: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+                     }
+
+
+    /* LEFT: Fragment::leftcolumn -> kontakt
+     ---------------------------------*/
+.frContacts         { border: 1px solid red; }
+
+
+    /* LEFT: Fragments::leftcolumn -> phone
+    ----------------------------------*/
+.frPhone            { border: 1px solid black; }
+
+
+    /*  LEFT: Fragments::leftcolumn -> Friends:Header + body
+    -----------------------------------*/
+    /* Friends header */
+.frFriendsHead      { }
+.frFriendsHeadSeite { position: relative; width: 2.5rem; height: 3.125rem; }
+.frFriendsHeadCenter{ text-align: center; padding-top: 10px; }
+.frFriendsHeadHref  { display: inline-block; padding: 0.875rem 0.313rem; }
+.frFriendsDropMenu  { width: 13.5rem; padding: 5px;  }
+.frFriendsDropHref  { display: block; padding: 0.313rem; font-size: 0.9rem; color: #202020; white-space: nowrap;
+                      overflow: hidden; font-size: inherit; font-weight: 100; text-decoration: none !important;
+                    }
+.frFriendsDropBild  { width: 1.5rem; vertical-align: -0.375rem; }
+.frFriendsDropHref:hover    { background-color: #EAEAEA; }
+    /* Friends body */
+.frFriendsBody      {  }
+.frFriendsClick     { display: inline-block; width: 100%; padding: 10px; text-decoration: none;
+                      border: 1px solid transparent; }
+.frFriendsClick:hover   { background-color: #E6F5FF; }
+.frFriendsClickVisited  { background-color: #E6F5FF; }
+
+    /* RIGHT: Fragments::msg.html
+     ---------------------------- */
+.frMsg              { }
+.frMsgHeaderTab     { width: 100%; height: 3.125rem; }
+.frMsgHeaderTab img { vertical-align: middle; }
+.frMsgHeaderClose   { width: 2rem; text-align: center; }
+.frMsgHeaderBild    { width: 3.125rem; text-align: center; }
+.frMsgHeaderUser    { max-width: 9.375rem; }
+.frMsgHeaderPhone   { width: 2rem; text-align: center; }
+.frMsgHeaderSuche   { width: 2rem; text-align: center; }
+.frMsgHeaderMenu    { width: 3.125rem; text-align: center; }
+
+    /* LEFT: SETTING -> setting.html
+     --------------------------------------*/
+.frSettingHeader    { width: 100%; height: 3.125rem; }
+.frSettingHeaderLeft{ width: 3.125rem; text-align: center; }
+.frSettingHeadCentr { text-align: center; }
+.frSettingBody      { padding: 10px; }
+    /*profil*/
+.frSettingProfilTab { background-color: #F7F7F7; border: 1px solid #F2F2F2; border-spacing: 0;
+                      width: 100%; height: 5.0rem; border-radius: 8px; }
+.frSettingProfilTab:hover, .frSettingHover { background-color: #E6F5FF; }
+.frSettingProfilBild    { width: 4.375rem;}
+.frSettingProfilFigure  { width: 4.375rem; height: 4.375rem; }
+.frSettingProfilCircle  { height: 3.25rem; width: 3.35rem; border: 1px solid black; border-radius: 50%; }
+.frSettingProfilName    { height: 2.5rem; max-width: 10.25rem; vertical-align: bottom;  }
+.frSettingProfilMail    { max-width: 10.25rem; vertical-align: top;  }
+.frSettingProfilInfo    { text-align: right; width: 1.25rem; max-width: 1.25rem; /* wenn aktiv: 1.25rem */ }
+    /* für alle setting optionen */
+.frSettingInfoZeichen   {  }
+.frSettingRightFail     { width: 1.0rem; background-image: url("../img/rechtsgrau.svg"); background-repeat: no-repeat;
+                          background-size: 0.75rem; background-position-y: center; background-position-x: right 3px; }
+    /* setting.html information ausgabe */
+.frSettingInfoShow      { }
+    /* setting.html allgemeine optionen */
+.frSettingTab           { width: 100%; background-color: #F7F7F7; border-spacing: 0; border-radius: 8px; }
+.frSettingTabTr         { }
+.frSettingTabTr:hover   { background-color: #E6F5FF; }
+.frSettingIcon          { width: 2.5rem; padding: 5px; text-align: center; }
+.frSettingOptionName    {  }
+.frSettingNeu           { background: #0080FF; color: white; padding: 1px 5px; border-radius: 6px; }
+.frSettingInfo          { max-width: 3.125rem; text-align: right; }
+
+    /* RIGHT: Fragments::kanal.html
+     ------------------------------*/
+.frChannel          { /* Ofenteichen Kanal */ }
+
+
+    /* RIGHT: Fragment::createchannel.html
+     -----------------------------------*/
+.frCreateChannel    { /* Erstellen einen Ofenteichen Kanal */ }
+
+
+    /* RIGHT: Fragments::invite.html
+     ---------------------------------------*/
+.frInvite           { }
+
+
+
+    /* RIGHT: Fragment::newgroup.html
+    ----------------------------------*/
+.frNewGroup         { }
+
+
+    /* RIGHT: Fragment::createsecretchat.html
+     -----------------------------------------*/
+.frCreateSecretChat { }
+
+
+    /* RIGHT: settingCategory -> header für Alle
+     ----------------------------------*/
+.frCategoryHeaderTab    { width: 100%; height: 3.125rem; border-spacing: 0; }
+.frCategoryHeaderLeft   { width: 5.0rem; padding-left: 10px; }
+.frCategoryHeaderCentr  { text-align: center; }
+.frCategoryHeaderRight  { width: 5.0rem; text-align: center; }
+
+    /* RIGHT: settingCategory -> body für Alle
+     ------------------------------------------*/
+.frCategoryBody         { min-width: 20.0rem; max-width: 40.625rem; padding: 10px;  }
+.frCategoryBodyItem     { background-color: #FFF; width: 100%; border-radius: 10px;}
+.frCategoryBodyTab      { width: 100%; border-spacing: 0; }
+.frCategoryTr           { padding: 0 10px; }
+.frCategoryEinTd        { padding: 10px;}
+.frCategoryLeft         { }
+.frCategoryCenter       { padding: 10px; }
+.frCategoryRight        { }
+
+    /* RIGHT: settingCategory -> editprofile.html
+       ------------------------------------ */
+.frEditProfile          {  }
+    /* Pop-up-Fenster abmelden */
+.profilAbmelden         { position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+                          background: hsla(0, 100%, 0%, 0.5); transition: background 1s;
+                          transition: transform ease-in-out 0.15s, opacity ease-out 0.15s;
+                          transform-origin: 50% 110%; transform: scaleX(0.01) scaleY(0.01); opacity: 0;
+                        }
+.profilAbmeldenOpen     { transform: scaleX(1.0) scaleY(1.0); opacity: 1; pointer-events: all; }
+.profilAbmeldeBox       { width: 20.0rem; padding: 10px; border-radius: 10px; }
+.profilAbmeldeHeadTab   { width: 100%; height: 2.5rem; border-spacing: 0; }
+.profilAbmeldeHeadLeft  { width: 2.5rem; text-align: center; }
+.profilAbmeldeHeadCentr { text-align: center; }
+
+.profilAbmeldeBodyTab   { background-color: #FFF; width: 100%; border-spacing: 0;  border-radius: 10px; }
+.profilAbmeldeBodyTr    { cursor: default; }
+.profilAbmeldeBodyTr:active { background-color: #E6E6E6; }
+.profilAbmeldeBodyCenter    { padding: 10px 0; }
+.profilAbmeldeBodyRight { width: 1.0rem; text-align: right; }
+.profilAbmeldeButton    { background-color: #FF0000; width: 100%; padding: 10px; border-radius: 10px; color: white;
+                          font-size: inherit; border: 0; }
+
+
+    /* RIGHT: settingCategory -> generally.html(Allgemein)
+     ----------------------------------------*/
+.frGenerally       { }
+
+
+
+    /* RIGHT: others(fragment 2 reihe) -> header für alle
+     ---------------------------------*/
+.frOtherHeader      { background-color: #F2F2F2;}
+.frOtherHeaderTab   { width: 100%; height: 3.125rem; border-spacing: 0; }
+.frOtherHeaderLeft  { width: 5.0rem; }
+.frOtherHeaderCenter{ text-align: center; }
+.frOtherHeaderRight { width: 5.0rem; text-align: center; }
+.frOtherHeaderBody  { overflow-y: scroll; }
+/*
+@media (max-width: 650px)   { }
+@media (min-width:768px)    { }
+@media (min-width:992px)    { }
+@media (min-width:1200px)   { }
+*/

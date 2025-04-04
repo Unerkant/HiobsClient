@@ -1,4 +1,11 @@
 
+    /* :::::::::::::::::::::::: Was Soll noch gemacht werden ::::::::::::::::::::::::::::::::::::: */
+        
+        1. ankomende messages count anzeigen, nur die classe einbinde und count angeben, die classe
+            befindet sich in fragments.css: .frMenuCountTrue (Fragments/components:: footer Menü Bar)
+        2.
+
+
     /* :::::::::::::::::::::::: Anleitung zu Project Hiobs Client ::::::::::::::::::::::::::::::::: */
 
         1. der Project HiobsClient basiert sich auf:
@@ -128,21 +135,6 @@
         <script src="/js/stomp.js"></script>
         <script src="/js/socketConnect.js"></script>
     3.
-
-
-    Controller:
-        ind den controller wird zuerst geprüft ob in Datenbank H2 der Token vorhanden ist,
-        kein Token: login Seite starten zum Einloggen
-
-        @Autowired
-        private TokenService tokenService;
-        @GetMapping(value = {"/", "/index"})
-        public String getIndex(){
-            String token = tokenService.meinToken();
-            return (token == null ? "/login" : "/index");
-        }
-        **********
-    1.
 
     /* ******************************** login.html + LoginController ****************************** */
     Login.html

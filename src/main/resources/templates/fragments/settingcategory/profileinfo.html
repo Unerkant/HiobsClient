@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="profileinfofragment">
+
+  <div class="fragmentBox">
+    <div class="fragmentGrid">
+
+      <!-- Profil Header -->
+      <div class="fragmentHeader">
+        <table class="frCategoryHeaderTab" border="1">
+          <tr>
+            <td class="frCategoryHeaderLeft">
+              <a class="clickClose" data-th-href="@{/setting}">
+                <img src="/img/close.svg" width="22" class="middles">
+              </a>
+              <a class="clickBack middles" data-th-onClick="rightHide('setting')"><!-- rightHide -> resize.js -->
+                <img src="/img/linksblau.svg" class="middles" width="20">
+                <span class="textBlau bottoms">Zur&#252;ck</span>
+              </a>
+            </td>
+            <td class="frCategoryHeaderCentr">
+              <strong>Info</strong>
+            </td>
+            <td class="frCategoryHeaderLeft" data-th-onClick="window.location.href = '/setting/editprofile'">
+              <span class="textBlau">Bearb.</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Profil Body -->
+      <div class="fragmentBody">
+        Body Anzeige
+      </div>
+
+    </div><!-- Ende Fragment Grid -->
+  </div>
+
+</th:block>
+
+</html>

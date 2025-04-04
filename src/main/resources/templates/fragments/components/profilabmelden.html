@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<!-- Anzeige in fragments/settingcategory/editprofile.html -->
+<th:block data-th-fragment="profilAbmelden">
+
+  <!-- Pop-up-Fenster für abmelden-->
+  <div id="PROFILABMELDEN" class="profilAbmelden flexCenter">
+    <div class="profilAbmeldeBox backGround nichtmarkieren">
+
+      <!-- Pop-up-Fenster Header -->
+      <table class="profilAbmeldeHeadTab" >
+        <tr>
+          <td class="profilAbmeldeHeadLeft">
+            <img src="/img/closeBlau.svg" width="24" class="middles">
+          </td>
+          <td class="profilAbmeldeHeadCentr">
+            <strong>Abmelden</strong>
+          </td>
+          <td class="profilAbmeldeHeadLeft">&#160;</td>
+        </tr>
+      </table>
+
+      <div class="leer0">&#160;</div>
+      <small class="textGrau">ALTERNATIVE OPTIONEN</small>
+
+      <!-- Pop-up-Fenster Body -->
+      <table class="profilAbmeldeBodyTab">
+        <tr data-th-onClick="@{window.location.href='/setting/security'}" class="profilAbmeldeBodyTr">
+          <td class="profilAbmeldeHeadLeft">
+            <img src="/img/settings/pinncode.svg" width="30" class="middles">
+          </td>
+          <td class="profilAbmeldeBodyCenter">
+            <p>Pincode einrichten<br>Sperre die APP mit einem localen Pincode
+              so dass andere sie nicht &#246;ffnen k&#246;nnen.
+            </p>
+          </td>
+          <td class="profilAbmeldeBodyRight">
+            <img src="/img/rechtsgrau.svg" width="14" class="middles">
+          </td>
+        </tr>
+
+        <tr><td class="profilAnmeldeHeadLeft"></td><td colspan="2" class="borderTop"></td></tr>
+
+        <tr data-th-onClick="@{window.location.href='/setting/savedata'}" class="profilAbmeldeBodyTr">
+          <td class="profilAbmeldeHeadLeft">
+            <img src="/img/settings/abfall.svg" width="30" class="middles">
+          </td>
+          <td class="profilAbmeldeBodyCenter">
+            <p>Cache leeren<br>Cebe jederzeit Speicherplatz von deinem
+              Ger&#228;t frei. Deine Medien bleiben in der Cloud.
+            </p>
+          </td>
+          <td class="profilAbmeldeBodyRight">
+            <img src="/img/rechtsgrau.svg" width="14" class="middles">
+          </td>
+        </tr>
+
+        <tr><td class="profilAnmeldeHeadLeft"></td><td colspan="2" class="borderTop"></td></tr>
+
+        <tr class="profilAbmeldeBodyTr">
+          <td class="profilAbmeldeHeadLeft">
+            <img src="/img/settings/mail.svg" width="30" class="middles">
+          </td>
+          <td class="profilAbmeldeBodyCenter">
+            <p>E-Mail &#228;ndern<br>Verschiebe deine Kontakte, Gruppen, Nachrichten
+              und Medien auf eine neue E-Mail.
+            </p>
+          </td>
+          <td class="profilAbmeldeBodyRight">
+            <img src="/img/rechtsgrau.svg" width="14" class="middles">
+          </td>
+        </tr>
+
+        <tr><td class="profilAnmeldeHeadLeft"></td><td colspan="2" class="borderTop"></td></tr>
+
+        <tr data-th-onClick="@{window.location.href='/setting/support'}" class="profilAbmeldeBodyTr">
+          <td class="profilAbmeldeHeadLeft">
+            <img src="/img/settings/support.svg" width="30" class="middles">
+          </td>
+          <td class="profilAbmeldeBodyCenter">
+            <p>Support kontaktieren<br>Melde uns jederzeit Probleme. Die
+              abmeldung l&#246;st sie normaleweise nicht.
+            </p>
+          </td>
+          <td class="profilAbmeldeBodyRight">
+            <img src="/img/rechtsgrau.svg" width="14" class="middles">
+          </td>
+        </tr>
+      </table>
+
+      <div class="leer1">&#160;</div>
+      <!-- Profil Abmelden Button-->
+      <button class="profilAbmeldeButton" data-th-onClick="postRequest('/auth', 'keine')">Abmelden</button>
+
+    </div><!-- Ende Profil Abmelden Box-->
+  </div><!-- Ende Profil Abmelden Kasten -->
+
+</th:block>
+
+</html>

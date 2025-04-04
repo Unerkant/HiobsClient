@@ -27,8 +27,8 @@
 
     userName = document.getElementById('userName').value.trim();
 
-    //var socket = new SockJS("http://194.164.63.85:8080/register");
-    var socket = new SockJS("http://localhost:8080/register");
+    var socket = new SockJS("http://194.164.63.85:8080/register");
+    //var socket = new SockJS("http://localhost:8080/register");
     stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function (frame) {

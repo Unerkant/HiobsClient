@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <!-- standard 'head' mit css anbindung, keine javascript angebunden -->
-<head data-th-insert="~{ fragments/head :: global_head}"></head>
+<head data-th-insert="~{ fragments/components/head :: login_head}"></head>
 <body>
 
 <!-- javascript disabled -> class:container {display:none} -->
-<noscript data-th-insert="~{fragments/noscript :: nojavascript}"></noscript>
+<noscript data-th-insert="~{fragments/components/noscript :: nojavascript}"></noscript>
 
 <!-- container nicht löschen, bei no script wird ausgeblendet -->
 <div class="container">
@@ -17,7 +17,7 @@
 <div class="idcodeBox">
     <div class="leer2">&#160;</div>
     <div class="itemCenter">
-        <img src="/img/favicon310.svg" class="loginImgKlein">
+        <img src="/img/logins/favicon310.svg" class="loginImgKlein">
     </div>
     <div class="leer1">&#160;</div>
     <h2 class="maroon itemCenter">Hiobs Post</h2>

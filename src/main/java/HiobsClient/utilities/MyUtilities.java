@@ -52,9 +52,19 @@ public class MyUtilities {
     public String getLanguage() {
         Locale locale =  Locale.getDefault();
         if (locale == null){
-            locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+           // locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+            locale = Locale.of(System.getProperty("user.language"), System.getProperty("user.country"));
         }
-        return locale.getLanguage();
+
+        String land = null;
+        switch (locale.getLanguage()) {
+            case"de":           land = "Deutsch"; break;
+            case"us":           land = "USA"; break;
+            case"uk":           land = "England"; break;
+            default:            land = "EU";
+        }
+        //return locale.getLanguage();
+        return land;
     }
 
 }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="friendsfragment">
+
+<div class="fragmentBox fragmentGrid">
+
+    <!-- ***** HEADER: von Friends ***** -->
+<div class="fragmentHeader">
+    <div class="fragmentColumns">
+
+        <div class="frFriendsHeadSeite">&#160;</div>
+        <div class="frFriendsHeadCenter">
+            <h2>Chats</h2>
+        </div>
+        <div class="frFriendsHeadSeite">
+            <!-- parameter von dropMenu(#ID + open class(chat.css) + event) -->
+            <a data-th-onClick="return dropBox('CREATEMENU','dropMenuOpen', event)" class="frFriendsHeadHref">
+                <img width="22" src="/img/menublau.svg">
+            </a>
+
+            <!-- Drop Menu in Header, dropMenu-class von chat.css rest von fragments.css -->
+            <div id="CREATEMENU" class="dropMenu shadows">
+                <div class="frFriendsDropMenu">
+                    <a data-th-href="@{/msg/invite}" class="frFriendsDropHref">
+                        <img src="/img/dropmenu/personplus.svg" class="frFriendsDropBild">
+                        <span>Freund Einladen</span>
+                    </a>
+                </div>
+                <div class="frFriendsDropMenu">
+                    <a data-th-href="@{/msg/createchannel}" class="frFriendsDropHref">
+                        <img src="/img/dropmenu/megaphon.svg" class="frFriendsDropBild">
+                        <span>Neuer Kanal</span>
+                    </a>
+                </div>
+                <div class="frFriendsDropMenu">
+                    <a data-th-href="@{/msg/newgroup}" class="frFriendsDropHref">
+                        <img src="/img/dropmenu/gruppe.svg" class="frFriendsDropBild">
+                        <span>Neue Gruppe</span>
+                    </a>
+                </div>
+                <div class="frFriendsDropMenu">
+                    <a data-th-href="@{/msg/createsecretchat}" class="frFriendsDropHref">
+                        <img src="/img/dropmenu/schloss.svg" class="frFriendsDropBild">
+                        <span>Neuer geheimer Chat</span>
+                    </a>
+                </div>
+            </div><!-- #CREATEMENU-->
+        </div>
+
+    </div><!-- Ende Fragment Column -->
+
+</div><!-- Ende fragmentHeader(Grid 1) -->
+
+
+    <!-- ***** BODY: hier werden alle Friends Ausgegeben ***** -->
+<div class="fragmentBody frFriendsBody">
+    <div>
+        <span>Freunde daten: </span> <span data-th-text="${freundeDaten}"></span>
+    </div>
+    <table border="1">
+        <tr data-th-each="friend : ${freundeDaten}">
+            <td data-th-text="${friend.getFriendstoken}"></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <div>Token: <span data-th-utext="${msgToken}"></span> / <span data-th-text="${kanalToken}"></span></div>
+
+    <a id="1" class="frFriendsClick" data-th-href="@{'/msg/'+${msgToken}}"
+       data-th-classappend="${clickActiv} == ${msgToken} ? 'frFriendsClickVisited' : '' " >Message Click mit 1 parameter</a>
+
+    <a id="2" class="frFriendsClick" data-th-href="@{'/msg/'+${msgToken}+'/'+${msgAnker}}">Message Click mit 2 parameter</a>
+
+    <a id="3" class="frFriendsClick" data-th-href="@{'/msg/'+${kanalToken}}">Kanal Click mit 1 parameter</a>
+
+    <a id="4" class="frFriendsClick" data-th-href="@{'/msg/'+${kanalToken}+'/'+${msgAnker}}">Kanal Click mit 2 parameter</a>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a class="frFriendsClick" data-th-href="@{/msg}">Message Click ohne parameter</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a class="frFriendsClick" data-th-href="@{/msg}">Message Click ohne parameter</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a class="frFriendsClick" data-th-href="@{/msg}">Message Click ohne parameter</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+</div><!-- Ende fragmentBody(grid 2) -->
+
+</div><!-- Ende fragmenten Grid Box -->
+
+</th:block>
+
+</html>

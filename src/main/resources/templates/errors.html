@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head data-th-insert="~{ fragments/head :: global_head }"></head>
+<head data-th-insert="~{ fragments/components/head :: login_head }"></head>
 
 <body>
 
@@ -18,7 +18,7 @@
           &#160;die gewünschte Seite konnte nicht gefunden werden</h3>
         <div class="leer1">&#160;</div>
         <span>bitte nutzen Sie die Loginseite, neue anzumelden </span>
-        <a data-th-href="@{/index}">Zur&#252;ck</a>
+        <a data-th-href="@{/}">Zur&#252;ck</a>
         <div class="leer3">&#160;</div>
         <img src="/img/what.png" width="256" height="256">
       </div>

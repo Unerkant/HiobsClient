@@ -43,9 +43,8 @@ public class AuthService {
      * @param auth
      * @return
      */
-    public Auth loginSave(Auth auth) {
-        return authRepository.save(auth);
-    }
+    public Auth loginSave(Auth auth) { return authRepository.save(auth); }
+
 
     /**
      * Benutzt: LoginController

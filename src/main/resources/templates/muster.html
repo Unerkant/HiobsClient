@@ -14,7 +14,8 @@
 <article>
     <!-- 1 ************* alles ausgaben **************** -->
 
-
+    <!-- bei insert lieber block benutzen kein div, weil flex oder grid funktioniert nicht (keine height:100%)  -->
+    <th:block data-th-insert="~{ fragments/test :: fragmentName}"></th:block>
 
     <!-- 1 ************* ende alles ausgaben **************** -->
 </article>
@@ -22,3 +23,55 @@
 </div><!-- /container -->
 </body>
 </html>
+
+
+
+<!-- @PostRequest, senden + parameter -->
+<code>
+    // Senden
+    <a data-th-onClick="postMapping('setting', 'Test Text')">Click</a>
+
+       @Controller
+    @PostMapping(value = "/setting")
+    public String getSetting(@RequestParam(value = "param", required = true) String param,
+    Model model) {
+
+    /* fragment Name gesendet an index.html */
+    model.addAttribute("leftFragmentName", "einstellfragment");
+    System.out.println("Setting Get: " + param);
+
+    return "index";
+    }
+</code>
+<code>
+    <li>
+        <a href="/logout" th:href="@{#}" onclick="$('#form').submit();"> <!--/* jQuery */-->
+            <!-- onClick="document.getElementById('form').submit();" -->
+            <span aria-hidden="true"></span>&nbsp;Logout
+        </a>
+        <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+
+    </li>
+</code>
+
+<!-- GET: parameter versenden als variable -->
+<code>
+    model.addAttribute("msg", "01234567890");
+
+    <a data-th-href="@{${'/msg/'+msg}}">Senden</a>
+    <a data-th-href="@{'/msg/'+${msg}}">Senden</a>
+
+    @GetMapping(value = "/msg/{id}")
+    public String getSetting(@PathVariable("id") String id) {...}
+</code>
+
+<!-- Controller, Parameter auslesen -->
+<code>
+    @GetMapping(value = "/setting/{path}")
+    public String getSetting(@PathVariable("path") String path, Model model) {
+
+        model.addAttribute("rightFragmentName", path);
+
+        return "index";
+    }
+</code>

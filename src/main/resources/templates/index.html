@@ -1,61 +1,181 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <style type="text/css"><!-- @import"/css/style.css"; --></style>
-</head>
+<!-- standard 'head' mit css anbindung, keine javascript angebunden -->
+<head data-th-insert="~{ fragments/components/head :: chat_head}"></head>
 
 <body>
-    <br>
-    <br>
-    <h3 align="center">Index.html</h3>
-  <br>
-  <br>
-  <br>
-  <h2 align="center">Hiobs Client</h2>
-  <div align="center"><small id="connectAnzeige"></small></div>
-  <div class="leer50">&#160;</div>
-  <div align="center">
+<div id="Container">
 
-      <div id="connectBox">
-          <strong>bitte melden sie sich an!</strong>
-          <input type="text" id="userName" placeholder="Name" autofocus
-                 class="fontSize11" maxlength="50" width="200" style="padding: 0.6em;" >
-          &#160;&#160;&#160;
-          <button type="button" onclick="onConnect()" style="padding: 0.6em;" >Verbinden</button>
-      </div>
+<!-- ***** Complete Chat Div(Main) -->
+<div id="MAIN" class="main">
 
-      <table width="80%" border="0" cellspacing="5" cellpadding="0" id="messageBox" style="visibility: hidden;">
+    <!-- ********** Ordner Teil(links) *********** -->
 
-          <tr><td colspan="3" id="mitWemVerbunden"></td></tr>
-          <tr><td colspan="3"></td></tr>
-
-          <tr>
-              <td width="150">
-                  <input type="text" id="recipientName" placeholder="Name"  class="fontSize11 autoWidth" autofocus >
-              </td>
-              <td>
-                  <input type="text" id="messageText" placeholder="Schreibe eine Nachricht..." autofocus required
-                             class="fontSize11 autoWidth" >
-              </td>
-              <td width="100" align="center">
-                  <button onclick="sendeMessage(recipientName.value, messageText.value)"
-                              class="fontSize11 autoWidth">Senden</button>
-              </td>
-          </tr>
-          <tr><td colspan="3">&#160;</td></tr>
+    <div id="ORDNERBOX" class="ordnerBox bgWhite">
+        <th:block data-th-insert="~{ fragments/ordnermenu :: ordnerVertikal}"></th:block>
+    </div>
 
 
-          <tfoot id="messageAusgabe"></tfoot>
+    <!-- ******************** Chat Box (Freunde(leftColumn) + Message(rightColumn) ) ************** -->
 
-      </table>
-  </div>
+    <div id="CHATBOX" class="chatBox">
+
+        <!--***************** Linke Seite: Freunde( nur in #CHATBOX) ****************************** -->
+
+        <div id="LEFTCOLUMN" class="leftColumn borderRight bgWhite">
+        <!-- Grid: Vertikal aufteilung(Body + footer(Menü))  -->
+        <div class="gridFooter">
+
+            <!-- Grid 1, Kontakte + Phone + Freunde + setting Ausgabe  -->
+            <div class="scrollColumn" data-th-switch="${leftFragmentName}">
+
+                <th:block data-th-case="'friends'"
+                          data-th-insert="~{ fragments/friends :: friendsfragment}">
+                </th:block>
+                <th:block data-th-case="'/contacts'"
+                          data-th-insert="~{ fragments/contacts :: contactsfragment}">
+                </th:block>
+                <th:block data-th-case="'/phone'"
+                          data-th-insert="~{ fragments/phone :: phonefragment}">
+                </th:block>
+                <th:block data-th-case="'/setting'"
+                          data-th-insert="~{ fragments/setting :: settingfragment}">
+                </th:block>
+                <th:block data-th-case="*">
+                    <div class="height100 flexCenter">
+                        <small class="columnLeer">Keine Daten vorhanden</small>
+                    </div>
+                    <a data-th-href="@{/}">Nicht</a>
+                    <br>
+                    <a data-th-href="@{/index}">Index</a>
+                    <br>
+                    <a data-th-href="@{'/index/'+${msgToken}}">Index + Token</a>
+                    <br>
+                    <a data-th-href="@{'/index/'+${msgToken}+'/'+${msgAnker} }">Index * Token + Anker</a>
+                </th:block>
+
+            </div><!-- Ende Grid 1 -->
+
+            <!-- Grid 2: footer(untere Menü Bar)-->
+            <div class="leftColumnMenuBar">
+                <th:block data-th-insert="~{ fragments/components/footermenubar :: menubar}"></th:block>
+            </div>
+
+        </div><!-- Ende Grid-Footer -->
+        </div><!-- Ende LeftColumn(in chatBox) -->
 
 
-  <script src="/js/sockjs.js"></script>
-  <script src="/js/stomp.js"></script>
-  <script src="/js/socketConnect.js"></script>
+        <!--***************** Message Rechte Seite (nur in #CHATBOX) ****************************** -->
+
+        <div id="RIGHTCOLUMN" class="rightColumn scrollColumn" data-th-classappend="${rightFragmentName} ? ${slideRightsShows} : '' ">
+
+            <!--
+                * ACHTUNG:  rightFragmentName → das ist die Fragmente Name, zugesendet von MsgController,
+                *           nach dem Namen wir die passende fragment angezeigt
+                * SLIDER EFFECT: slider-effect funktioniert nur unter 650px und ist reine css angaben,
+                *                erstellt der class wird unter @media (max-width:650px){.sliderRightShow{...} }
+                *                in chat.css, aber zugesendet von MsgController....,
+                *                über 650px: die zugesendete class(.sliderRightShow) ist einfach leer
+                * SLIDER HIDE:  Schliessen der angezeigte fragment wird durch javascript function 'rightHide(){....}'
+                *
+                *
+            -->
+
+            <!-- message oder setting ausgabe -->
+            <div id="RIGHTCOLUMNOPEN"   data-th-if="${rightFragmentName}"
+                                        data-th-switch="${rightFragmentName}" class="height100">
+
+                <!-- Haupt-Fragment 1 reihe, gesteuert von Controller -->
+                <th:block data-th-case="'msg'"
+                          data-th-insert="~{ fragments/msg :: msgfragment }"></th:block>
+                <th:block data-th-case="'channel'"
+                          data-th-insert="~{ fragments/channel :: channelfragment}" ></th:block>
+                <th:block data-th-case="'invite'"
+                          data-th-insert="~{ fragments/dropmenu/invite :: invitefragment}" ></th:block>
+                <th:block data-th-case="'createchannel'"
+                          data-th-insert="~{ fragments/dropmenu/createchannel :: createchannelfragment}" ></th:block>
+                <th:block data-th-case="'newgroup'"
+                          data-th-insert="~{ fragments/dropmenu/newgroup :: newgroupfragment }"></th:block>
+                <th:block data-th-case="'createsecretchat'"
+                          data-th-insert="~{ fragments/dropmenu/createsecretchat :: createsecretchatfragment }"></th:block>
+                <!-- die variable von settingCategory zuerst auf NULL geprüft, ansonsten "Error resolving templates" -->
+                <th:block data-th-case="'settingCategory'"
+                data-th-insert="~{ 'fragments/settingcategory/'+${category} :: ${category}+'fragment'} ?: ~{}"></th:block>
+                <th:block data-th-case="*">
+                    <div class="gridBox">
+                        <div></div>
+                        <div class="flexCenter">
+                            <small class="columnLeer">Fragment nicht gefunden!</small>
+                        </div>
+                        <div></div>
+                    </div>
+                </th:block>
+
+                <!-- Fragment 2 reihe, gesteuert von javascript otherFragment.js-->
+                <!-- Benutzt: msg.html + channel.html, click in Header User Name -->
+                <!-- Benutzt: settingCategory alle click in der RightColumn(2 reihe) -->
+                <div id="OTHERFRAGMENT" class="otherFragment otherFragmentHide">
+                <!-- die variable otherFragmentName soll auf NULL geprüft sein, ansonsten "Error resolving templates" -->
+                    <th:block id="OTHERINSERT"
+                    data-th-insert="~{ 'fragments/others/'+${otherFragmentName} :: ${otherFragmentName}+'Fragment' } ?: ~{}" ></th:block>
+                </div>
+
+            </div><!-- Ende if + switch -->
+
+            <!-- Keine message oder setting geladen -->
+            <div class="height100" data-th-unless="${rightFragmentName}">
+                <div class="gridBox">
+                    <div>header<small class="textGrau"> (index.html, Zeile122)</small></div>
+                    <div class="flexCenter">
+                        <small class="columnLeer">Chat auswählen, um zu schreiben</small>
+                    </div>
+                    <div>footer<small class="textGrau">(index.html, Zeile 126)</small></div>
+                </div>
+            </div>
+
+        </div><!-- Ende Right Column -->
+    </div><!-- Ende CHATBOX -->
+
+
+    <!-- ******************** Smile Box Teil(Rechts) ********************************************** -->
+
+    <div id="SMILEBOX" class="smileBox borderLeft bgWhite">
+        <div class="gridBox">
+            <div>Header</div>
+            <div>Body</div>
+            <div>Bottom</div>
+        </div>
+    </div>
+
+</div> <!-- Ende Main -->
+<!-- ***** Ende Chat Div(Main)-->
+
+</div><!-- Ende Container -->
+
+  <script data-th-src="@{/js/sockjs.js}"></script>
+  <script data-th-src="@{/js/stomp.js}"></script>
+  <script data-th-src="@{/js/socketConnect.js}"></script>
+  <script data-th-src="@{/js/index.js}"></script>
+  <script data-th-src="@{/js/resize.js}"></script>
+  <script data-th-src="@{/js/otherFragment.js}"></script>
+  <script data-th-src="@{/js/postRequest.js}"></script>
+  <!-- link manipuliert: MsgController/switch/default -->
+  <script data-th-if="${linkFehler}" data-th-inline="javascript">
+    /*<![CDATA[*/
+        var divId = "RIGHTCOLUMN";
+        var text  = "Der Link ist ungültig oder verändert.\n"
+                        +" Bitte starten Sie die App neu, um den Fehler zu beheben.";
+        showErrors(divId, text);
+        //alert(text);
+    /*]]>*/
+  </script>
+    <!--
+        * Fehler aus dem MsgController/Zeile: 70, anzeigen in #RIGHTCOLUMN(hier)
+        * Fehler Ursache: wen einen hatte den Link Parameter verändert
+        * z.b.s. http://localhost:8090/msg/newgr, das Original: http://localhost:8090/msg/newgroup
+        * Quelle: function.js/msgShow(...){...}
+    -->
+
 </body>
 </html>

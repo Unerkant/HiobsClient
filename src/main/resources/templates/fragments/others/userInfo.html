@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="userInfoFragment">
+
+<div class="fragmentGrid frOtherHeader">
+
+  <!-- Header-->
+  <div class="fragmentHeader">
+    <table class="frOtherHeaderTab">
+      <tr>
+        <td class="frOtherHeaderLeft">
+          <a class="finger noWraps" data-th-onClick="otherHide()"><!-- otherHide -> otherFragment.js -->
+            <img src="/img/linksblau.svg" width="20" class="middles">
+            <span class="textBlau bottoms">Zur&#252;ck</span>
+          </a>
+        </td>
+        <td class="frOtherHeaderCenter">
+          <strong>Name</strong>
+        </td>
+        <td class="frOtherHeaderRight">
+          <span>&#160;</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Body -->
+  <div class="frOtherHeaderBody">
+    <h2 align="center">Body</h2>
+    <h4 data-th-text="${request}"></h4>
+    <h2 data-th-text="${otherFragmentName}">Test Text</h2>
+  </div>
+
+</div>
+
+</th:block>
+
+</html>
