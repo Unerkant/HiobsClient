@@ -1,22 +1,23 @@
-<!DOCTYPE html>
 <html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <th:block data-th-fragment="friendsfragment">
 
 <div class="fragmentBox fragmentGrid">
 
-    <!-- ***** HEADER: von Friends ***** -->
-<div class="fragmentHeader">
-    <div class="fragmentColumns">
+    <!-- ******************** HEADER: von Friends *************************************** -->
 
-        <div class="frFriendsHeadSeite">&#160;</div>
+    <!-- Grid 1-->
+<div class="fragmentHeader">
+    <div class="fragmentColumns nichtmarkieren">
+
+        <div class="frFriendsHeadSeitlich">&#160;</div>
         <div class="frFriendsHeadCenter">
             <h2>Chats</h2>
         </div>
-        <div class="frFriendsHeadSeite">
+        <div class="frFriendsHeadSeitlich">
             <!-- parameter von dropMenu(#ID + open class(chat.css) + event) -->
             <a data-th-onClick="return dropBox('CREATEMENU','dropMenuOpen', event)" class="frFriendsHeadHref">
-                <img width="22" src="/img/menublau.svg">
+                <img width="26" src="/img/hamburgblau.svg">
             </a>
 
             <!-- Drop Menu in Header, dropMenu-class von chat.css rest von fragments.css -->
@@ -53,20 +54,84 @@
 </div><!-- Ende fragmentHeader(Grid 1) -->
 
 
-    <!-- ***** BODY: hier werden alle Friends Ausgegeben ***** -->
-<div class="fragmentBody frFriendsBody">
-    <div>
-        <span>Freunde daten: </span> <span data-th-text="${freundeDaten}"></span>
-    </div>
-    <table border="1">
-        <tr data-th-each="friend : ${freundeDaten}">
-            <td data-th-text="${friend.getFriendstoken}"></td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <div>Token: <span data-th-utext="${msgToken}"></span> / <span data-th-text="${kanalToken}"></span></div>
+    <!-- ******************** BODY: hier werden alle Freunde Ausgegeben ****************** -->
 
+    <!-- Grid 2-->
+<div class="fragmentBody frFriendsBody">
+
+    <!--
+        1. alle registrierte Freunde Laden: Quelle: HiobsServer/primary/Model/Friends
+        2. <a data-th-each="friends : ${freundeDaten}" id="${friends.messagetoken}"
+
+        3. Freunde Daten: [friends{id=52, datum='30-05-2025 21:35:05', friendsbild='hiobspost', friendsmail='',
+        friendsname='Hiobs', friendspseudonym='HP', friendstelefon='', friendstoken='', friendsvorname='Post',
+        gespeichertestoken='', hiobstoken='', meinentoken='30052025213505', messagetoken='20250530213505', role='',
+        letzteNachricht='null', datumLetzteNachricht='null'}]
+    -->
+    <div data-th-if="${freundeDaten != null}" data-th-each="friends : ${freundeDaten}">
+
+     <!-- Alle Freunde in Thymeleaf schleife ausgabe -->
+        <div  class="frFriendBox">
+            <a data-th-href="@{'/msg/'+${friends.messagetoken} }" class="unlink nichtmarkieren frFriendClick"
+               data-th-classappend="${msgToken} == ${friends.messagetoken} ? 'frFriendClickVisited' : '' ">
+                <div class="ripple"></div>
+                <div class="flexRow frFriendFlexRow">
+                    <!-- User Bild -->
+                    <div class="frFriendBild flexCenter">
+                        <figure data-th-if="${friends.friendsbild}" class="flexCenter frFriendFigure">
+                            <img data-th-src="@{${ profilBildUrl+friends.friendsbild+'.png' }}"
+                                 class="imgCircle" decoding="async" draggable="false">
+                            <i id="'online@'+${friends.meinentoken}" class="frFriendOff" aria-hidden="true"></i>
+                        </figure>
+                        <span data-th-unless="${friends.friendsbild}" data-th-text="${friends.friendspseudonym}"
+                                class="flexCenter imgCircle bgFA fontLarge textBlau"></span>
+                    </div>
+                    <!-- User Name + Datum -->
+                    <div class="frFriendUserInfo ">
+                        <div class="textEllipsis">
+                            <span class="frFriendNameText" data-th-text="${friends.friendsname != null}
+                                  ? ${friends.friendsname} +' '+ ${friends.friendsvorname} : ${friends.frinedspseudonym} ">
+                            </span>
+                            <!-- Bild anerkennung, nur für den chat Hiobs Post -->
+                            <span class="frFriendAppend"
+                                  data-th-classappend="${friends.friendsname == 'Hiobs'} ? 'frFriendAnerkennung' : '' ">
+                            </span>
+                            <span class="frFriendDatum frFriendTextSize textGrau">
+                                <i id="'done@'+${friends.meinentoken}" class="frFriendAppend" aria-hidden="true"></i>
+                                <span data-th-text="${friends.datumLetzteNachricht}"></span>
+                            </span>
+                        </div>
+                        <!-- Message -->
+                        <div class="clear frFriendTextSize textGrau">
+                            <p class="frFriendClamp">
+                                <i data-th-text="${friends.letzteNachricht}" class="frFriendAppend"></i>
+                                <span data-th-text="${friends.friendspseudonym}">111</span>
+                            </p>
+                        </div>
+                    </div>
+                </div><!-- Ende Row( 2 x item) -->
+            </a>
+        </div><!-- Ende frFriendsBox -->
+
+     <!-- Ende alle Freunde ausgabe -->
+    </div> <!-- Ende Thymeleaf if and each-->
+
+    <div class="leer3">&#160;</div>
+
+    <!-- Keine Freunde vorhanden, außer die 2, HiobsPost & Gespeichertes -->
+    <div data-th-if="${ freundeDaten == null || freundeDaten.length < 3 }">
+        <div class="leer3">&#160;</div>
+        <a data-th-href="@{/msg/invite}" class="frFriendsDropHref">
+            <p class="centers">
+                <b class="textBlau">Keine Freunde vorhanden!</b><br>
+                <img src="/img/dropmenu/personplus.svg" class="frFriendsDropBild">
+                <span>Freund Einladen</span>
+            </p>
+        </a>
+    </div>
+
+
+<!--
     <a id="1" class="frFriendsClick" data-th-href="@{'/msg/'+${msgToken}}"
        data-th-classappend="${clickActiv} == ${msgToken} ? 'frFriendsClickVisited' : '' " >Message Click mit 1 parameter</a>
 
@@ -75,46 +140,9 @@
     <a id="3" class="frFriendsClick" data-th-href="@{'/msg/'+${kanalToken}}">Kanal Click mit 1 parameter</a>
 
     <a id="4" class="frFriendsClick" data-th-href="@{'/msg/'+${kanalToken}+'/'+${msgAnker}}">Kanal Click mit 2 parameter</a>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <a class="frFriendsClick" data-th-href="@{/msg}">Message Click ohne parameter</a>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <a class="frFriendsClick" data-th-href="@{/msg}">Message Click ohne parameter</a>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <a class="frFriendsClick" data-th-href="@{/msg}">Message Click ohne parameter</a>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
+    -->
 </div><!-- Ende fragmentBody(grid 2) -->
-
-</div><!-- Ende fragmenten Grid Box -->
+</div><!-- Ende fragmentBox, fragmentGrid -->
 
 </th:block>
 

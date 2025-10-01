@@ -1,7 +1,9 @@
 package HiobsClient.service;
 
+import HiobsClient.model.Friends;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -67,5 +69,47 @@ public class ApiService {
         }
 
         return response;
+    }
+
+
+    /**
+     * einen request response array in einem Friends Array umwandeln, für Thymeleaf data-th-each="" ausgabe
+     *
+     *  so sieht es der response array: Freunde Daten: [
+     *         *                    {"id":52,"datum":"30-05-2025 21:35:05","friendsbild":"hiobspost", ...
+     *  so sieht es als Friends Object: Freunde Daten: [friends
+     *                              {id=52, datum='30-05-2025 21:35:05', friendsbild='hiobspost', friendsmail='', ...
+     *
+     *  FAZIT: der Friends ArrayObject ist bereit für eine Thymeleaf schleife:
+     *  <code>
+     *     <div data-th-if="${freundeDaten != null}">
+     *         <ul data-th-each="entry, stats : ${freundeDaten}">
+     *             <li data-th-text="${stats.count}"></li>
+     *             <br>
+     *             <li data-th-text="${entry.id}"></li>
+     *         </ul>
+     *     </div>
+     *  </code>
+     *
+     *  CONTROLLER: response array an function: arrayToEachArray() senden, return als Friends ArrayObject
+     *  Friends[] friends = apiService.arrayToEachArray(response.body());
+     *                 // Friends ArrayObject an html senden
+     *         model.addAttribute("freundeDaten",
+     *                 response.body().isBlank() ? null : friends);
+     *
+     * @param array
+     * @return
+     */
+    public Friends[] arrayToEachArray(String array) {
+
+        ObjectMapper mapper = new ObjectMapper();
+        Friends[] friends;
+        try {
+            friends =  mapper.readValue(array, Friends[].class);
+            return friends;
+        } catch (JsonProcessingException e) {
+            return null;
+            //throw new RuntimeException(e);
+        }
     }
 }

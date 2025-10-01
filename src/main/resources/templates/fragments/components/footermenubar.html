@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
     <!-- Footer Manü Bar -->
@@ -10,28 +9,30 @@
         <td class="frMenuTd">
             <a data-th-href="@{/contacts}" class="frMenuAhref">
                 <img width="36"
-                     data-th-src="${contactsRequestUri == '/contacts'} ? @{/img/userBlau.svg} : @{/img/userGrau.svg}" >
+                     data-th-src="${contactsRequestUri == '/contacts'}
+                     ? @{/img/menupersonblau.svg} : @{/img/menupersongrau.svg}" >
                 <p class="frMenuCountFalse"></p>
             </a>
         </td>
         <td class="frMenuTd">
             <a data-th-href="@{/phone}" class="frMenuAhref">
                 <img width="36"
-                     data-th-src="${phoneRequestUri == '/phone'} ? @{/img/telefonBlau.svg} : @{/img/telefonGrau.svg}" >
+                     data-th-src="${phoneRequestUri == '/phone'}
+                     ? @{/img/menuphoneblau.svg} : @{/img/menuphonegrau.svg}" >
                 <p class="frMenuCountFalse"></p>
             </a>
         </td>
         <td class="frMenuTd">
             <a data-th-href="@{/msg}" class="frMenuAhref">
                 <img width="36" data-th-src="${msgRequestUri == '/msg' }
-                    ? @{/img/chatBlau.svg} : @{/img/chatGrau.svg}" >
+                    ? @{/img/menuchatblau.svg} : @{/img/menuchatgrau.svg}" >
                 <p class="frMenuCountFalse"></p>
             </a>
         </td>
         <td class="frMenuTd">
             <a data-th-href="@{/setting}" class="frMenuAhref" >
                 <img width="36" data-th-src="${settingRequestUri == '/setting'}
-                    ? @{/img/settingBlau.svg} : @{/img/settingGrau.svg}" >
+                    ? @{/img/menusettingblau.svg} : @{/img/menusettinggrau.svg}" >
                 <p class="frMenuCountFalse"></p>
             </a>
         </td>

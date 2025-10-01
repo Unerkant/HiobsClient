@@ -1,0 +1,96 @@
+/**
+ * Den 29.09.2024
+ *
+ *   *  <style type="text/css"><!-- @import"/css/style.css"; --></style>
+ *   *  background-image: url("../img/giter.png"); box-shadow: 0px 0px 5px 0px rgba: 0,0,0,0.9;
+ *   *  Box auf 100% kommen box-sizing: border-box;
+ *   *  1rem = 16px,
+ */
+
+@charset "UTF-8";
+*			        { margin: 0;  padding: 0; }
+html, body 	        { height: 100%; width: 100%; min-width: 380px; min-height: 550px; background-image: url("../img/giter.svg"); }
+@media (min-width:768px) and (min-height:550px){ body { position: fixed; top: 0; right: 0; bottom: 0; left: 0; } }
+/*html                { line-height: 1.15; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+*, *::before, *::after { box-sizing: border-box; }*/
+
+ .leer0              { height: 0.3em; border: 1px solid transparent; }
+ .leer1              { height: 1.0em; border: 1px solid transparent; }
+ .leer2              { height: 2.0em; border: 1px solid transparent; }
+ .leer3              { height: 3.0em; border: 1px solid transparent; }
+ .leer4              { height: 4.0em; border: 1px solid transparent; }
+ .leer5              { height: 5.0em; border: 1px solid transparent; }
+ .leer7              { height: 7.0em; border: 1px solid transparent; }
+
+:root {
+    --font-serif: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
+    --font-monos: "Roboto Mono", "Droid Sans Mono", "Menlo", "Ubuntu Mono", monospace;
+    --font-hiobs: "Roboto Condensed", "Roboto", "Helvetica Neue", sans-serif;
+    --font-size16:      1.0rem;
+    --klar:             #FFFFFF00;
+    --hellBlau:         #EAF2FB;
+    --hovers:           #CCEEFF;    /* Blau */
+    --frHover:          #E6F5FF;    /* Blau 95% */
+    --colorLightBlue:   #EAF2FB;    /* Hell Blau */
+    --colorF2:          #F2F2F2;
+    --colorFA:          #FAFAFA;
+    --colorEA:          #EAEAEA;
+    --colorBlack:       #333;
+    --colorWhite:       #FFF;
+    --colorBlue:        #0050FF;
+    --colorGray:        #8C8C8C;
+    --colorRed:         #FF0000;
+    --colorRipple:      rgba(0, 0, 0, 0.08);
+}
+
+.borderTop          { border-top: 1px solid var(--colorEA); }
+.borderRight        { border-right: 1px solid var(--colorEA); }
+.borderBottom       { border-bottom: 1px solid var(--colorEA); }
+.borderLeft         { border-left: 1px solid var(--colorEA); }
+.borderVoll         { border: 1px solid var(--colorEA); }
+.bgFF               { background-color: var(--colorWhite); }
+.bgFA               { background-color: var(--colorFA); }
+.bgF2               { background-color: var(--colorF2); }
+.textRot            { color: var(--colorRed); }
+.textGrau           { color: var(--colorGray); }
+.textBlau           { color: var(--colorBlue); }
+.textBlack          { color: var(--colorBlack); }
+
+.fontLarge          { font-size: 1.5rem; } /* 24px */
+
+a.unlink, a.unlink:link, a.unlink:hover     { color: inherit; text-decoration: inherit; }
+a.noStyle           { text-decoration: none; color: var(--colorBlack);  }
+a.noActive          { pointer-events: none; cursor: default; text-decoration: none; color: var(--colorEA); }
+input:focus, textarea:focus, select:focus   { outline: none; }
+img.blok			{ display: block; width: 100%; height: auto; }
+
+.nichtmarkieren     { -ms-user-select: None; -moz-user-select: None; -webkit-user-select: None; user-select: None; cursor: default; }
+.textEllipsis       { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } /* erforderlich max-width, an TD */
+.ripple             { top: 0; right: 0; bottom: 0; left: 0; background-color: yellow; }
+.rippleShow         { position: absolute; z-index: 10; }
+.shadow             { border: 1px solid rgba(29,92,123,0.3); box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .10); }
+.imgCircle          { width: 3.25rem; height: 3.25rem; border: 1px solid transparent; border-radius: 50%; }
+.boxSizing          { box-sizing: border-box; }
+.displayBlock       { display: block; }
+.displayNone        { display: none; }
+
+.height100          { height: 100%;}
+.hrLine             { background-color: var(--colorEA); color: var(--colorEA); border: none; height: 1px; }
+.finger             { cursor: pointer; }
+.defaults           { cursor: default; }
+.clear              { clear: both; }
+.noWraps            { white-space: nowrap; overflow: hidden; }
+.middles            { vertical-align: middle; }
+.bottoms            { vertical-align: bottom; }
+.centers            { text-align: center; }
+
+                    /* Vertical Ausrichtung( Head, Body & Footer) px 100% px */
+.gridBox            { display: grid; height: 100%; grid-template-rows: auto 1fr auto;} /* header + body + bottom */
+.gridFooter         { display: grid; height: 100%; grid-template-rows: 1fr auto; } /* body + footer */
+.gridHeader         { display: grid; height: 100%; grid-template-rows: auto 1fr; } /* header + body */
+.flexCenter         { display: flex; justify-content: center; align-items: center; } /* item center  vert. + horz. */
+.flexRow            { display: flex; flex-direction: row; } /* width/auto oder auto/width */
+.flexWrap           { display: flex; flex-wrap: wrap; }
+.flexBetween        { display: flex; justify-content: space-between; } /* verteilt */
+
+

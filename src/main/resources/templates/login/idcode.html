@@ -17,7 +17,7 @@
 <div class="idcodeBox">
     <div class="leer2">&#160;</div>
     <div class="itemCenter">
-        <img src="/img/logins/favicon310.svg" class="loginImgKlein">
+        <img src="/img/logins/horn.svg" class="loginImgKlein">
     </div>
     <div class="leer1">&#160;</div>
     <h2 class="maroon itemCenter">Hiobs Post</h2>
@@ -66,7 +66,7 @@
     <div class="leer2">&#160;</div>
 
     <div data-th-if="${codeblock < 4}" class="idcodeForm">
-        <form data-th-action="@{/login/save}" method="POST">
+        <form data-th-action="@{/login/save}" method="POST" autocomplete="off">
         <div class="flexAround">
             <div class="idcodeInputBox">
             <input type="text" id="CODE1" name="codeEins" size="1" class="idcodeInput shadowInput"
@@ -98,6 +98,10 @@
         <input type="hidden" data-th-value="${mailadresse}" name="usermail">
             <!-- userdaten → 'gefunden' oder 'nichtgefunden' -->
         <input type="hidden" data-th-value="${mailfinden}" name="mailfund">
+            <!-- Plattform Daten von unterer javascript bekommen und an MailLoginController
+                 als request senden, Zeile: 137, 230 -->
+        <input type="hidden" id="BROWSER" name="browser">
+        <input type="hidden" id="PLATTFORM" name="platform">
         <div>
             <button id="BUTCODE" type="submit" class="loginLink"
             data-th-text="${mailfinden != null && mailfinden.equals('nichtgefunden')} ?
@@ -111,5 +115,11 @@
 
 </article>
 </div><!-- /container -->
+
+    <!-- Daten aus platform,js auslesen und an input:#ID-PLATTFORM übergeben an weiterer verwendung in MailLoginController -->
+    <script>
+        document.getElementById('BROWSER').value = platform.name;
+        document.getElementById('PLATTFORM').value = platform.description;
+    </script>
 </body>
 </html>

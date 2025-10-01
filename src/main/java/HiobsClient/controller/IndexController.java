@@ -21,13 +21,11 @@ public class IndexController {
     @GetMapping(value = {"", "/"})
     public ModelAndView index(HttpServletRequest request, Model model){
 
-        System.out.println("Index Controller: " + authService.authToken());
-
         /**
-         * IF: wenn sperre verhängt ist, eintragung in Millisekunden im spalte 'sperrdatum'
+         * IF: wenn Sperre verhängt ist, eintragung in Millisekunden in spalte 'sperrdatum'
          *    z.b.s  (31.12.2024 22:00:00 in Millisekunden: 1735678800000)
-         * else IF: wenn token existiert, spalte 'token' -> 123456789, wechseln zu Message Chat
-         * ELSE: wenn datenbank:Tabelle 'AUTH' leer ist, login starten
+         * else IF: wenn token existiert, spalte 'token' → 123456789, wechseln zu Message Chat
+         * ELSE: wenn datenbank: Tabelle 'AUTH' leer ist, login starten
          */
         if (authService.sperreMillis() != null) {
             return new ModelAndView("redirect:/sperre");

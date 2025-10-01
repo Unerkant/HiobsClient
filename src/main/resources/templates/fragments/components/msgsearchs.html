@@ -1,0 +1,49 @@
+<html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<th:block data-th-fragment="searchMessage">
+
+  <div class="fragmentColumns">
+    <!-- Linke Seite, Leer -->
+    <div class="frSearchLeft bgFA">&#160;</div>
+
+    <!-- Center, input search -->
+    <div class="frSearchCenter boxSizing bgFA" >
+      <table class="frSearchTab bgFA">
+        <tr>
+          <!-- Suchen Icon -->
+          <td class="frSearchIcon centers">
+            <img data-th-src="@{/img/sucheblau.svg}">
+          </td>
+          <!-- Input -->
+          <td>
+            <input id="SEARCHINPUT" type="text" class="frSearchInput"
+                   onKeyUp="this.value=this.value.replace(/[^a-zA-Z]/g,'');"
+                   data-th-onKeyUp="searchMessage([[${testJson}]],'AUSGABEITEM', this.value )"
+                   maxlength="50" pattern="[A-Z]" placeholder="Zum Testen, admin oder user eingeben" autofocus="autofocus" >
+          </td>
+          <!-- Schliessen Button -->
+          <td class="frSearchIcon centers">
+            <img data-th-src="@{/img/schliessengrau.svg}"
+                 data-th-onClick="return searchShow('SEARCHFRAGMENT', 'searchOpen', event)">
+          </td>
+        </tr>
+        <!-- gefundene Nachricht anzeigen -->
+        <tr>
+          <td colspan="3">
+            <p id="AUSGABEITEM" class="frSearchSuchen"></p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Right, Calendar -->
+    <div class="frSearchRight centers bgFA">
+      <a class="frSearchCalendarStart" data-th-onClick="return searchCalendarShow('AUSGABEITEM', event)">
+        <img data-th-src="@{/img/calendarblau.svg}" width="30">
+      </a>
+    </div>
+  </div>
+
+</th:block>
+
+</html>

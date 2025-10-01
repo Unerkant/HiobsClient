@@ -3,7 +3,6 @@ package HiobsClient.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ErrorsController {
 
-    @GetMapping(value = {"/{errLink}", "/index/{errLink}", "/login/{errLink}"})
-    public ModelAndView errors(@PathVariable("errLink") String errLink, Model model) {
+    @GetMapping(value = {"/error", "/errors"})
+    public ModelAndView errors(Model model) {
 
         /**
          * URL auslesen...(nur anzeige in errors.html)

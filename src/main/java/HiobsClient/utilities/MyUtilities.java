@@ -41,15 +41,55 @@ public class MyUtilities {
         return format.format(us);
     }
 
+    /**
+     * Aktuelle Tag + Monat + Jahr (Deutsche Format)
+     * ==============================================================
+     * @return
+     */
+    public String jahrTag() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date de = new Date();
+        return format.format(de);
+    }
+
+
+    /**
+     * Aktuelles Tages Zeit
+     * ==============================================================
+     * @return
+     */
+    public String tagZeit() {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date de = new Date();
+        return format.format(de);
+    }
+
 
     /**
      * Landes Code
      * <br><br>
-     * return:  ~de
+     * return:  ~de, uk oder us
      *
      * @return
      */
     public String getLanguage() {
+        Locale locale =  Locale.getDefault();
+        if (locale == null){
+            // locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
+            locale = Locale.of(System.getProperty("user.language"), System.getProperty("user.country"));
+        }
+        return locale.getLanguage();
+    }
+
+
+    /**
+     * Land in String ausgeben
+     * <br><br>
+     * return:  Deutsch, USA oder EU
+     *
+     * @return
+     */
+    public String getLand() {
         Locale locale =  Locale.getDefault();
         if (locale == null){
            // locale = new Locale(System.getProperty("user.language"), System.getProperty("user.country"));
@@ -61,7 +101,7 @@ public class MyUtilities {
             case"de":           land = "Deutsch"; break;
             case"us":           land = "USA"; break;
             case"uk":           land = "England"; break;
-            default:            land = "EU";
+            default:            land = "WORLD";
         }
         //return locale.getLanguage();
         return land;

@@ -6,8 +6,9 @@ import HiobsClient.model.Exception;
 import HiobsClient.service.ApiService;
 import HiobsClient.service.AuthService;
 import HiobsClient.utilities.MyUtilities;
-import HiobsClient.utilities.UrlResolver;
+import HiobsClient.utilities.GeoLocation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.json.JSONObject;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.net.http.HttpResponse;
 
 
@@ -36,7 +36,12 @@ public class MailLoginController {
     @Autowired
     private MyUtilities myUtilities;
     @Autowired
-    private UrlResolver urlResolver;
+    private GeoLocation geoLocation;
+
+    @Value("${project.artifactId}")
+    private String appnames;
+    @Value("${project.version}")
+    private String appversions;
 
     private Boolean mailerrors  = false;
     private int codeVersuch     = 0;
@@ -131,7 +136,9 @@ public class MailLoginController {
             HttpServletRequest request,
             Model model) {
 
-
+        // Plattform Daten auslesen
+        String plattform = request.getParameter("platform");
+        String browser   = request.getParameter("browser");
 
         // Date sammeln und an HiobsServer senden
         String eins = request.getParameter("codeEins");
@@ -149,7 +156,6 @@ public class MailLoginController {
         // Daten an HiobsServer senden zum ApiLoginController/@PostMapping(value = "/loginSave")
         HttpResponse<String> output = apiService.requestApi(codeLink, userSend);
 
-
         /**
          * ****** output.body() *******
          *
@@ -160,8 +166,10 @@ public class MailLoginController {
 
         JSONObject object = new JSONObject(output.body());
         String mail = object.getString("email");
+        String pseu = object.getString("pseudonym");
         String wert = object.getString("other");
         String fund = object.getString("role");
+        String token = object.getString("token");
 
         if (wert.equals("falschecode")){
 
@@ -173,6 +181,9 @@ public class MailLoginController {
 
             if (codeVersuch > 3) {
                 codeVersuch = 0;
+
+                /* nach 4 falsch angegebene code ins Datenbank speichert */
+                anmeldeProtokollieren(token, mail, browser, plattform, wert);
             }
 
             codeVersuch = codeVersuch + 1;
@@ -188,33 +199,131 @@ public class MailLoginController {
 
         } else {
 
-            //Registrierung/Einloggen erfolgreich, in H2/Auth Daten speichern
+            /**
+             * Registrierung/Einloggen erfolgreich, in H2/Auth Daten speichern
+             * other & role wird, den wert überspeichert
+             */
             String other = object.getString("other");
             String role = object.getString("role");
-            String token = object.getString("token");
             Long sperre = object.optLong("sperrdatum") == 0 ? null : object.getLong("sperrdatum");
 
             // Daten für Datenbank vorbereiten
             Auth auth = new Auth();
-            auth.setId(1);
             auth.setDatum(myUtilities.deDatum());
             auth.setMail(mail);
+            auth.setPseudonym(pseu);
             auth.setOther(other);
             auth.setRole(role);
             auth.setToken(token);
             auth.setSperrdatum(sperre);
 
             Auth loginAuth = authService.loginSave(auth);
-            //System.out.println("Success: " + loginAuth);
-
+            System.out.println("Success: " + loginAuth);
+            // an success.html senden
             model.addAttribute("userObject", object);
             model.addAttribute("userCookie", cookie);
+
+            /**
+             * Alle Anmelde ins globalen Datenbank speichern und automatisch an die ID benachrichtigen
+             * plattform → zugesendet von idcode.html, Zeile: 103
+             *                             <input type="hidden" id="PLATTFORM" name="plattform">
+             */
+            if (loginAuth != null) {
+                anmeldeProtokollieren(token, pseu, browser, plattform, "angemeldet");
+            }
 
             return "login/success";
         }
 
     }
 
+
+    /**
+     * Jedes Anmelden/Einloggen wir ins Datenbank protokolliert
+     * HiobsServer/globalHiobs/letzteLogin
+     *
+     * BENUTZT: von hier oben Zeile: 187 & 232
+     *
+     * @param token
+     * @param pseudonym
+     * @param browser
+     * @param platform
+     * @param action
+     */
+    private void anmeldeProtokollieren(String token, String pseudonym, String browser, String platform, String action )
+    {
+
+        String anmeldeText  = "";
+        String titelText    = "";
+        // Daten von geoLocation holen und Standort erstellen
+        JSONObject geo = geoLocation.clientGeo();
+        String standort = geo.get("continent").toString() + ", " + geo.get("countryName").toString() + ", "
+                        + geo.get("principalSubdivision").toString() + ", " + geo.get("city").toString();
+
+        // Titel Text erstellen, rest ist Allgemein(sihe anmeldeText)
+        switch (action) {
+            case "angemeldet":      titelText =
+                    "<p><b>Neue Anmeldung.&#160;</b>Lieber(r)<span>"+ pseudonym+",</span>  wir haben eine " +
+                    "Anmeldung von einem neuen Gerät bei deinem Konto am " +myUtilities.jahrTag()+
+                    " um " +myUtilities.tagZeit()+ " UTC festgestellt.</p>";
+                    break;
+
+            case "falschecode":      titelText =
+                    "<p><b class='textRot'>Ung&#252;ltiger Aktivierungscode.&#160;</b>" +
+                    "\n" +
+                    "Lieber(r)<span>"+ pseudonym+",</span>  wir haben eine " +
+                    "Anmeldung mit Falsche Aktivierungscode bei deinem Konto am " +myUtilities.jahrTag()+ " " +
+                    "um " +myUtilities.tagZeit()+ " UTC festgestellt.</p>";
+                    break;
+            default:
+        }
+        /**
+         * Text ist Allgemein nur titelText ist anders,
+         */
+        anmeldeText =
+                "<div>"+titelText +
+                "\n"+
+                "<p><b>Ger&#228;t: </b> "+ appnames + ", " + appversions + ", "+ platform +" </p>" +
+                "\n" +
+                "<p><b>Standort: </b> " + standort + "</p>" +
+                "\n" +
+                "<p>Wenn du das nicht selbst gewesen bist, so kannst du die die entsprechende Sitzung abmelden: " +
+                "<b>Hiobs Client Einstellungen > Ger&#228;te </b> oder " +
+                "<b>Privatsph&#228;re und Sicherheit > Aktive Sitzungen </b></p>" +
+                "\n" +
+                "<p>Hat sich jemand ohne dein Einverst&#228;ndnis angemeldet, so kannst du die zweistufige " +
+                "Best&#228;tigung in den Einstellungen unter Privatsphäre und Sicherheit aktivieren.</p>" +
+                "</div>";
+
+        // Json-Object erstellen, nach letzteLogin(model) von HiobsServer/Model/LetzteLogin
+        JSONObject obj = new JSONObject();
+        obj.put("appname", appnames);
+        obj.put("appvers", appversions);
+        obj.put("browser", browser);
+        obj.put("datum", myUtilities.deDatum());
+        obj.put("ip", geoLocation.clientIp());
+        obj.put("land", myUtilities.getLanguage());
+        obj.put("name", pseudonym);
+        obj.put("other", "default");
+        obj.put("plattform", platform);
+        obj.put("role", "default");
+        obj.put("standort", standort);
+        obj.put("text", anmeldeText);
+        obj.put("token", token);
+
+        // Senden an Database: HiobsServer/globalHiobs/letzteLogin
+        String letzteLoginLink = webConfig.SERVER_HTTP+"letzteLoginSave";
+        HttpResponse<String> letzteLoginOutput = apiService.requestApi(letzteLoginLink, obj.toString());
+        /**
+         *  Gesendet an,
+         *  HiobsServer/ApiLetzteLoginController
+         *  @PostMapping(path = "/letzteLoginSave")
+         *  public void letzteLoginSave(@RequestBody Letztelogin loginDaten){...}
+         *
+         *  * response: 'letzteLoginOutput' ist eine ID von dieser anmelden(als Symbol, nicht erforderlich)
+         *  * System.out.println("response:" + letzteLoginOutput.body());     // response: 12
+         */
+    }
 
 
     /**
@@ -234,7 +343,7 @@ public class MailLoginController {
         Exception except = new Exception();
 
         except.setDatum(myUtilities.deDatum());
-        except.setErrip(urlResolver.getNetzwerkIp());
+        except.setErrip(geoLocation.clientIp());
         except.setErrcode(statusCode);
         except.setErrquelle(fehlerQuelle);
         except.setErrtext(fehlerText);

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <!-- Anzeige in fragments/settingcategory/editprofile.html -->
@@ -6,13 +5,13 @@
 
   <!-- Pop-up-Fenster für abmelden-->
   <div id="PROFILABMELDEN" class="profilAbmelden flexCenter">
-    <div class="profilAbmeldeBox backGround nichtmarkieren">
+    <div class="profilAbmeldeBox bgF2 nichtmarkieren">
 
       <!-- Pop-up-Fenster Header -->
       <table class="profilAbmeldeHeadTab" >
         <tr>
           <td class="profilAbmeldeHeadLeft">
-            <img src="/img/closeBlau.svg" width="24" class="middles">
+            <img src="/img/close.svg" width="24" class="middles">
           </td>
           <td class="profilAbmeldeHeadCentr">
             <strong>Abmelden</strong>
@@ -44,7 +43,7 @@
 
         <tr data-th-onClick="@{window.location.href='/setting/savedata'}" class="profilAbmeldeBodyTr">
           <td class="profilAbmeldeHeadLeft">
-            <img src="/img/settings/abfall.svg" width="30" class="middles">
+            <img src="/img/abfallrot.svg" width="30" class="middles">
           </td>
           <td class="profilAbmeldeBodyCenter">
             <p>Cache leeren<br>Cebe jederzeit Speicherplatz von deinem

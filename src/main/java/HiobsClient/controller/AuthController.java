@@ -6,7 +6,7 @@ import HiobsClient.model.Exception;
 import HiobsClient.service.ApiService;
 import HiobsClient.service.AuthService;
 import HiobsClient.utilities.MyUtilities;
-import HiobsClient.utilities.UrlResolver;
+import HiobsClient.utilities.GeoLocation;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,11 +27,11 @@ public class AuthController {
     @Autowired
     private WebConfig webConfig;
     @Autowired
-    private AuthService authService;
+    private GeoLocation geoLocation;
     @Autowired
     private MyUtilities myUtilities;
     @Autowired
-    private UrlResolver urlResolver;
+    private AuthService authService;
     @Autowired
     private ApiService apiService;
 
@@ -58,7 +58,7 @@ public class AuthController {
 
         Exception except = new Exception();
         except.setDatum(myUtilities.deDatum());
-        except.setErrip(urlResolver.getNetzwerkIp());
+        except.setErrip(geoLocation.clientInfo("ipString"));
         except.setErrcode(400);
         except.setErrquelle("http://localhost:8090/h2-console, database: hiobsClient, Tabelle: Auth");
         except.setErrtext("Abmeldung nicht M&#246;glich, Tabelle Auth wird nicht geleert/gel&#246;scht,");

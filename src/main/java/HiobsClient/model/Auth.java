@@ -17,18 +17,20 @@ public class Auth {
     private String datum;
     private String mail;
     private String other;
+    private String pseudonym;
     private String role;
     private Long sperrdatum;
     private String token;
 
     public Auth(){}
 
-    public Auth(Integer id, String datum, String mail, String other, String role,
+    public Auth(Integer id, String datum, String mail, String other, String pseudonym, String role,
                     Long sperrdatum, String token){
         this.id         = id;
         this.datum      = datum;
         this.mail       = mail;
         this.other      = other;
+        this.pseudonym  = pseudonym;
         this.role       = role;
         this.sperrdatum = sperrdatum;
         this.token      = token;
@@ -48,6 +50,9 @@ public class Auth {
     public String getOther() { return other;}
     public void setOther(String other) { this.other = other; }
 
+    public String getPseudonym() { return pseudonym; }
+    public void setPseudonym(String pseudonym) { this.pseudonym = pseudonym; }
+
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 
@@ -65,6 +70,7 @@ public class Auth {
                 ", datum='" + datum + '\'' +
                 ", mail='" + mail + '\'' +
                 ", other='" + other + '\'' +
+                ", pseudonym='" + pseudonym + '\'' +
                 ", role='" + role + '\'' +
                 ", sperrdatum='" + sperrdatum + '\'' +
                 ", token='" + token + '\'' +

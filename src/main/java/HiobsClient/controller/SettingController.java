@@ -79,7 +79,7 @@ public class SettingController {
         model.addAttribute("settingRequestUri", "/setting");
 
         /* Language */
-        model.addAttribute("land", myUtilities.getLanguage());
+        model.addAttribute("land", myUtilities.getLand());
 
         return new ModelAndView("index");
     }

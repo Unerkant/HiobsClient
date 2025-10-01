@@ -1,15 +1,15 @@
 package HiobsClient.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
+import org.springframework.stereotype.Component;
 
 /**
- * Den 2.02.2024
+ * Den 31.05.2025
  */
 
-@Entity
+@Component
 public class Friends {
 
     @Id
@@ -23,6 +23,8 @@ public class Friends {
     private String friendstelefon;
     private String friendstoken;
     private String friendsvorname;
+    private String gespeichertestoken;
+    private String hiobstoken;
     private String meinentoken;
     private String messagetoken;
     private String role;
@@ -37,6 +39,7 @@ public class Friends {
 
     public Friends(Long id, String datum, String friendsbild, String friendsmail, String friendsname,
                    String friendspseudonym, String friendstelefon, String friendstoken, String friendsvorname,
+                   String gespeichertestoken, String hiobstoken,
                    String meinentoken, String messagetoken, String letzteNachricht, String datumLetzteNachricht) {
         this.id                 = id;
         this.datum              = datum;
@@ -47,6 +50,8 @@ public class Friends {
         this.friendstelefon     = friendstelefon;
         this.friendstoken       = friendstoken;
         this.friendsvorname     = friendsvorname;
+        this.gespeichertestoken = gespeichertestoken;
+        this.hiobstoken         = hiobstoken;
         this.meinentoken        = meinentoken;
         this.messagetoken       = messagetoken;
         this.letzteNachricht    = letzteNachricht;
@@ -80,6 +85,12 @@ public class Friends {
     public String getFriendsvorname() { return friendsvorname; }
     public void setFriendsvorname(String friendsvorname) { this.friendsvorname = friendsvorname; }
 
+    public String getGespeichertestoken() { return gespeichertestoken; }
+    public void setGespeichertestoken(String gespeichertestoken) { this.gespeichertestoken = gespeichertestoken; }
+
+    public String getHiobstoken() { return hiobstoken; }
+    public void setHiobstoken(String hiobstoken) { this.hiobstoken = hiobstoken; }
+
     public String getMeinentoken() { return meinentoken; }
     public void setMeinentoken(String meinentoken) { this.meinentoken = meinentoken; }
 
@@ -109,6 +120,8 @@ public class Friends {
                 ", friendstelefon='" + friendstelefon + '\'' +
                 ", friendstoken='" + friendstoken + '\'' +
                 ", friendsvorname='" + friendsvorname + '\'' +
+                ", gespeichertestoken='" + gespeichertestoken + '\'' +
+                ", hiobstoken='" + hiobstoken + '\'' +
                 ", meinentoken='" + meinentoken + '\'' +
                 ", messagetoken='" + messagetoken + '\'' +
                 ", role='" + role + '\'' +
@@ -116,4 +129,5 @@ public class Friends {
                 ", datumLetzteNachricht='" + datumLetzteNachricht + '\'' +
                 '}';
     }
+
 }

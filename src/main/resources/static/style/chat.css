@@ -1,0 +1,83 @@
+/**
+ *  Den 29.09.2024
+ */
+    /* dropMenu -> fragments/friends.html Zeile: 20
+     ----------------------*/
+.dropMenu           { position: absolute; left: auto; top: 3.3rem; right: 5px; background-color: #FAFAFF;
+                      border: 1px solid rgba(29,92,123,0.3); border-radius: 8px; z-index: 5;
+                      transition: transform ease-in-out 0.25s, opacity ease-out 0.25s; transform-origin: top right;
+                      transform: scaleX(0.15) scaleY(0.15); opacity: 0;
+                    }
+.dropMenuOpen       { transform: scaleX(1.0) scaleY(1.0); opacity: 1; pointer-events: all; }
+
+.fehlerBox          { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); padding: 10px;
+                      background-color: #404040; color: #F2F2F2; border: 1px solid #202020; border-radius: 6px;
+                      white-space: pre-line; font-size: 1.0rem; }
+
+    /* msgSearch -> msg.html Zeile: 10 (fragments/components/msgsearchs.html)  */
+.msgSearch          { position: absolute; top: 0; right: 0; width: 100%; height: 3.125rem; background-color: transparent;
+                      transition: transform ease-in-out 0.5s, opacity ease-out 0.5s; /*transform-origin: top right;*/
+                      transform: scaleX(0.15) scaleY(0.15); opacity: 0;
+                    }
+.searchOpen         { transform: scaleX(1.0) scaleY(1.0); opacity: 1; pointer-events: all; }
+
+    /*  index.html -> slide css
+    --------------*/
+#Container          { height: calc(100vh); min-height: 100%; }
+
+.main               { display: flex; width: 100%; min-width: 26.25rem; height: 100%;/* width: 420px(orderBox + rightColumn) */ }
+.ordnerBox          { display: none; min-width: 4.375rem; max-width: 4.375rem; height: 100%; /* width: 70px */ }
+.chatBox            { display: flex; position: relative; width: 100%; min-width: 21.875rem; height: 100%; /* width: 350px */ }
+.leftColumn         { width: 18.75rem; min-width: 18.75rem; max-width: 40.625rem; height: 100%; /* mih-width: 300px */  }
+.rightColumn        { position: relative; width: 100%; min-width: 21.875rem; height: 100%; /* min-width: 350 */ }
+.scrollColumn       { overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; /* nicht löschen */ }
+.smileBox           { display: none; width: 21.875rem; min-width: 21.875rem; height: 100%; /* min+max-width: 350 */ }
+@media (max-width: 1200px)  { /*.smileBox { width: 0; min-width: 0; border: 0; overflow: hidden; } */ }
+@media (max-width:992px)    { }
+
+    /* unter 650px left(right leer) auf 100%, slide css für den resize.js */
+.sliderLeftOpen     { position: absolute; z-index: 1; width: 100%;  transition: width 0.3s; }
+.leftOpen           { position: absolute; z-index: 1; width: 100%;  }
+.leftWidth          { width: 100%; }
+.rightOpen          { position: absolute; z-index: 1; } /* ohne position, kein index */
+    /* chatShow/chatHide, für den resize.js   */
+.sliderRightShow    { /* nicht Löschen, benötigt wird index.html/#RIGHTCOLUMN/classappend...,  */ }
+    /* MsgController/model... Zeile: ~56 */
+@media (max-width:650px)    { .sliderRightShow{ position: absolute; left: 0; top: 0;
+                               animation-name: rightShows; animation-duration: .3s; animation-fill-mode: forwards; }
+                            }
+ @keyframes rightShows {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+ }
+    /* Benutzt: resize.js/Zeile: 91 + 140 (index.html/#RIGHTCOLUMN/classList.add...)  */
+.sliderRightHide      { animation-name: rightHides; animation-duration: .5s; animation-fill-mode: forwards;
+                      position: absolute; right: 0; top: 0; }
+@keyframes rightHides {
+   from { transform: translateX(0%);  }
+   to   { transform: translateX(100%); }
+}
+    /* Click Button in Header, wechseln von rund(close) auf fail(back) */
+.clickBack          { display: none; }
+.clickClose         { display: block; }
+@media (max-width: 650px)   { .clickBack{ display: block; } .clickClose{ display: none; } }
+
+    /* index.html -> leftColumn (CHATBOX) */
+.leftColumnMenuBar  { background-color: var(--colorFA); height: 3.125rem; border-top: 1px solid var(--colorEA); }
+
+
+    /* index.html -> rightColumn/userInfo
+     ------------------------------------*/
+.otherFragment      {background-color: #F2F2F2; width: 100%; height: 100%; z-index: 3; }
+.otherFragmentHide  { position: absolute; top: 0; right: 0;
+                      transform: translateX(100%); transition: transform 0.5s ease-in-out; }
+.otherFragmentShow  { transform: translateX(0); }
+
+    /* index.html Allgemein
+    ------------------------*/
+.columnLeer         { background-color: #FFFFFF; color: var(--colorGray); padding: 10px; border-radius: 15px; }
+
+@media (max-width: 650px)   {  } /* von bootstrap */
+@media (min-width:768px)    {  }
+@media (min-width:992px)    {  }
+@media (min-width:1200px)   {  }

@@ -1,62 +1,222 @@
-<!DOCTYPE html>
 <html lang="de" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <th:block data-th-fragment="msgfragment">
 
-<div class="fragmentBox">
+<div class="fragmentBox fragmentRelative">
+
+    <!-- ********************* Phone Fragment, chat.css ************************** -->
+  <!--  <div class="msgPhone">
+        <th:block data-th-insert="~{fragments/components/msgphone :: phoneCall }"></th:block>
+    </div>-->
+
+    <!-- ********************* Search Fragment, chat.css ************************** -->
+        <!-- search-function wird hier in fragmentBox als position: absolute, top: 0, right: 0 angezeigt -->
+    <div id="SEARCHFRAGMENT" class="displayNone msgSearch ">
+        <th:block data-th-insert="~{ fragments/components/msgsearchs :: searchMessage }"></th:block>
+    </div>
+    <!-- ********************* Ende Search Fragment ****************************** -->
+
     <div class="gridBox">
 
-        <!-- Msg Header -->
+        <!-- ***** Msg Header, Grid Box -> item 1 ***** -->
         <div class="fragmentHeader">
-            <table class="frMsgHeaderTab">
+
+            <table class="frMsgHeaderTab" data-th-each="freund : ${meinFreund}" >
                 <tr>
                     <!-- Close Button -->
-                    <td class="frMsgHeaderClose">
+                    <td class="frMsgHeaderClose centers">
+                        <!-- class clickClose & clickBack von chat.css (media:650, nur display: block/none) -->
                         <a class="clickClose" data-th-href="@{/msg}">
-                            <img src="/img/close.svg" width="26">
+                            <img src="/img/schliessengrau.svg">
                         </a>
                         <a class="clickBack" data-th-onClick="rightHide('msg')">
-                            <img src="/img/linksblau.svg" width="26">
+                            <img src="/img/linksblau.svg">
                         </a>
                     </td>
                     <!-- User Bild -->
-                    <td class="frMsgHeaderBild">
-                        <img src="/img/userBlau.svg" width="40">
+                    <td class="frMsgHeaderBild centers"
+                        data-th-onClick="otherRequest('/userInfo',[[${freund.meinentoken}]])">
+                        <img data-th-src="@{${profilBildUrl}+${freund.friendsbild}+'.png'}" class="frMsgHeaderIcon">
                     </td>
                     <!-- User Name + online zeit -->
-                    <td data-th-id="${msgToken}" class="frMsgHeaderUser textEllipsis"
-                        data-th-onClick="otherRequest('/userInfo',[[${msgToken}]])">
-
-                        <strong>User Name</strong>
+                    <td class="frMsgHeaderUser textEllipsis"
+                        data-th-onClick="otherRequest('/userInfo',[[${freund.meinentoken}]])">
+                        <strong data-th-text="${freund.friendsname != ''}
+                        ? ${freund.friendsname} +' '+ ${freund.friendsvorname}
+                        : ${freund.friendspseudonym} "></strong>
+                        <!-- Bild anerkennung, nur für den chat Hiobs Post -->
+                        <span class="frFriendAppend"
+                              data-th-classappend="${freund.friendsname == 'Hiobs'} ? 'frFriendAnerkennung' : '' ">
+                        </span>
                         <br>
-                        <small class="textGrau" >zul. online vor 5 Stunden und noch</small>
-
+                        <small class="textGrau" data-th-text="${freund.role != ''}
+                        ? ${freund.role} : 'zul. online vor 5 Stunden und noch' " ></small>
                     </td>
                     <!-- Telephone -->
                     <td class="frMsgHeaderPhone">
-                        <img src="/img/phoneblau.svg" width="26">
+                        <p class="" data-th-classappend="${freund.friendstelefon != ''} ? 'displayNone' : '' ">
+                        <a class="frMsgHeaderAhref"
+                           data-th-onClick="callByPhone([[${freund.friendstelefon}]], 'ANRUFEN', event)">
+                            <i id="ANRUFEN" class="icon-phone icon-blue icon-size30"></i>
+                            <!--<img id="IMGTELEFON" src="/img/phoneblau.svg" class="finger">
+                                <audio id="ANRUFEN" data-th-src="@{/tone/anruf.mp3}"></audio>-->
+                        </a>
+                        </p>
                     </td>
                     <!-- Suchen function -->
-                    <td class="frMsgHeaderSuche">
-                        <img src="/img/sucheblau.svg" width="26">
+                    <td class="frMsgHeaderSuche centers">
+                        <p class="" data-th-classappend="${msgdaten == null} ? '' : '' ">
+                            <a class="frMsgHeaderAhref" data-th-onClick="return searchShow('SEARCHFRAGMENT', 'searchOpen', event)">
+                                <img src="/img/sucheblau.svg">
+                            </a>
+                        </p>
                     </td>
                     <!-- Drop-Menü -->
                     <td class="frMsgHeaderMenu">
-                        <img src="/img/punktenblau.svg" width="26">
+                        <a class="frMsgHeaderAhref">
+                            <img src="/img/menublau.svg">
+                        </a>
                     </td>
                 </tr>
             </table>
-        </div> <!-- gridBox -> item 1(Header) -->
 
-        <!-- Msg Body -->
+        </div> <!-- Ende gridBox -> item 1(Header) -->
+
+        <!-- ***** Body, Messages Ausgabe, gridBox -> item2 ***** -->
         <div class="fragmentBody">
             <br>
+            <div data-th-text="${msgdaten}"></div>
             <br>
             <br>
             <h2 align="center"> MSG Fragment(body)</h2>
-        </div><!-- gridBox -> item 2(Body) -->
+            <br>
+            <br>
+            <i class="icon-done icon-ground-gray "></i>
+            <br>
+            <span data-th-text="${profilBildUrl+'hiobspost'+'.png'}"></span>
+            <img data-th-src="@{${ profilBildUrl+'hiobspost'+'.png' }}">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id="myAnker">Hier ist der Anker abgerufen mit Links</div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id="12345">hier ist der 2 Anker, abgerufen mit Calendar</div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div><!-- Ende gridBox -> item 2(Body) -->
 
-        <!-- Msg Footer -->
+        <!-- Msg Footer, gridBox -> item3 -->
         <div class="fragmentFooter">
             <input name="text" type="text" placeholder="Schreibe eine Nachricht..." style=" width: 100%; padding: 5px; autofocus">
         </div><!-- gridBox -> item 3 (Footer) -->

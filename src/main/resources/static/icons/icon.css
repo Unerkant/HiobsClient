@@ -1,0 +1,254 @@
+@font-face {
+  font-family: 'myicon';
+  src:  url('fonts/myicon.eot?ao6b7r');
+  src:  url('fonts/myicon.eot?ao6b7r#iefix') format('embedded-opentype'),
+    url('fonts/myicon.ttf?ao6b7r') format('truetype'),
+    url('fonts/myicon.woff?ao6b7r') format('woff'),
+    url('fonts/myicon.svg?ao6b7r#myicon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'myicon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+   /* ***** eigene angaben, i tag height 1em & font size 20px ***** */
+  /* display: inline-block;
+   width: 1em;
+   height: 1em;
+   text-align: center;
+   vertical-align: bottom;
+   font-size: 1.25rem;*/
+   font-size: 1.25rem;
+   color: #8C8C8C;
+}
+
+.icon-done:before {
+  content: "\e900";
+}
+.icon-doppeltdone:before {
+  content: "\e901";
+}
+.icon-left:before {
+  content: "\e902";
+}
+.icon-rechts:before {
+  content: "\e903";
+}
+.icon-nachoben:before {
+  content: "\e904";
+}
+.icon-nachunten:before {
+  content: "\e905";
+}
+.icon-weiterrechts:before {
+  content: "\e906";
+}
+.icon-weiterlinks:before {
+  content: "\e907";
+}
+.icon-close:before {
+  content: "\e908";
+}
+.icon-suchen:before {
+  content: "\e909";
+}
+.icon-paperclip:before {
+  content: "\e910";
+}
+.icon-pencil:before {
+  content: "\e911";
+}
+.icon-copy:before {
+  content: "\e912";
+}
+.icon-pin:before {
+  content: "\e913";
+}
+.icon-download:before {
+  content: "\e914";
+}
+.icon-teilen:before {
+  content: "\e915";
+}
+.icon-cloud:before {
+  content: "\e916";
+}
+.icon-kanal:before {
+  content: "\e917";
+}
+.icon-calendar:before {
+  content: "\e918";
+}
+.icon-archiv:before {
+  content: "\e919";
+}
+.icon-ordner:before {
+  content: "\e920";
+}
+.icon-ornneroffen:before {
+  content: "\e921";
+}
+.icon-aufnahme:before {
+  content: "\e922";
+}
+.icon-picture:before {
+  content: "\e923";
+}
+.icon-video:before {
+  content: "\e924";
+}
+.icon-film:before {
+  content: "\e925";
+}
+.icon-at:before {
+  content: "\e926";
+}
+.icon-emoji:before {
+  content: "\e927";
+}
+.icon-smile:before {
+  content: "\e928";
+}
+.icon-sticker:before {
+  content: "\e929";
+}
+.icon-printer:before {
+  content: "\e930";
+}
+.icon-lock:before {
+  content: "\e931";
+}
+.icon-micro:before {
+  content: "\e932";
+}
+.icon-star:before {
+  content: "\e933";
+}
+.icon-sprache:before {
+  content: "\e934";
+}
+.icon-word:before {
+  content: "\e935";
+}
+.icon-pdf:before {
+  content: "\e936";
+}
+.icon-zip:before {
+  content: "\e937";
+}
+.icon-control:before {
+  content: "\e938";
+}
+.icon-aus:before {
+  content: "\e939";
+}
+.icon-wifi:before {
+  content: "\e940";
+}
+.icon-gastminus:before {
+  content: "\e941";
+}
+.icon-gastplus:before {
+  content: "\e942";
+}
+.icon-gruppe:before {
+  content: "\e943";
+}
+.icon-giterBF:before {
+  content: "\e944";
+  color: #bfbfbf;
+}
+.icon-stopuhrgrau:before {
+  content: "\e945";
+  color: #8c8c8c;
+}
+.icon-phone:before {
+  content: "\e946";
+}
+.icon-phoneklingelt:before {
+  content: "\e947";
+}
+.icon-phoneeingehend:before {
+  content: "\e948";
+}
+.icon-phoneausgehend:before {
+  content: "\e949";
+}
+.icon-phoneauflegen:before {
+  content: "\e950";
+}
+
+/* ********** eigenes Styling, kann Standard werte überschreiben *********** */
+
+.icon-ground-gray {
+    background-color: #FAFAFA; border: 1px solid #B3B3B3;  border-radius: 50%; padding: 0.25rem;
+}
+
+.icon-ground-white {
+    background-color: #FFF; border: 1px solid #B3B3B3;  border-radius: 50%; padding: 0.25rem;
+}
+
+.icon-blue {
+    color: #0080FF;
+}
+
+.icon-gray {
+    color: #8C8C8C;
+}
+
+.icon-red {
+    color: #FA5252;
+}
+
+.icon-size16 {
+    font-size: 1.0rem;
+}
+
+.icon-size18 {
+    font-size: 1.125rem;
+}
+
+.icon-size20 {
+    font-size: 1.25rem;
+}
+
+.icon-size22 {
+    font-size: 1.375rem;
+}
+
+.icon-size25 {
+    font-size: 1.563rem;
+}
+
+.icon-size30 {
+    font-size: 1.875rem;
+}
+
+.icon-size35 {
+    font-size: 2.188rem;
+}
+
+.icon-size40 {
+    font-size: 2.5rem;
+}
+
+.icon-size50 {
+    font-size: 3.125rem;
+}
+
+.icon-size60 {
+    font-size: 3.75rem;
+}
